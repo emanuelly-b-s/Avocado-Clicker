@@ -2,9 +2,9 @@ using System.Windows.Forms;
 
 namespace Avocado_Cliker
 {
-    public partial class Form1 : Form
+    public partial class Clicker : Form
     {
-        public Form1()
+        public Clicker()
         {
             InitializeComponent();
         }

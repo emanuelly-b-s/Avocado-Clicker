@@ -30,15 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clicker));
             panel1 = new System.Windows.Forms.Panel();
-            pictureBox1 = new System.Windows.Forms.PictureBox();
+            avocado = new System.Windows.Forms.PictureBox();
+            textBox1 = new System.Windows.Forms.TextBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)avocado).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackgroundImage = (System.Drawing.Image)resources.GetObject("panel1.BackgroundImage");
-            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(avocado);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
@@ -46,18 +48,26 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
-            // pictureBox1
+            // avocado
             // 
-            pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            pictureBox1.Image = Properties.Resources.avocado;
-            pictureBox1.Location = new System.Drawing.Point(12, 88);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(178, 172);
-            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            avocado.BackColor = System.Drawing.Color.Transparent;
+            avocado.Cursor = System.Windows.Forms.Cursors.Hand;
+            avocado.Image = Properties.Resources.avocado;
+            avocado.Location = new System.Drawing.Point(3, 54);
+            avocado.Name = "avocado";
+            avocado.Size = new System.Drawing.Size(178, 172);
+            avocado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            avocado.TabIndex = 0;
+            avocado.TabStop = false;
+            avocado.Click += avocado_clicker;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new System.Drawing.Point(376, 178);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(125, 27);
+            textBox1.TabIndex = 1;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // Clicker
             // 
@@ -68,13 +78,15 @@
             Name = "Clicker";
             Text = "Clicker";
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)avocado).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox avocado;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

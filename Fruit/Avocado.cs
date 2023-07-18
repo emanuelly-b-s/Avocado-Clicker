@@ -8,14 +8,16 @@ namespace Avocado_Cliker.Fruit;
 
 internal class Avocado : IFruit
 {
-    public string Name { get; }
+    public string Name { get; } = "Avocado";
+    private float Clickers { get; set; }
+    public float clickersPerSecund;
 
-    public float ClickersPerSecund { get; set; } = 0;
+    public float SetClickers(float value) => Clickers += value;
 
-    public Avocado(string name) => Name = name;
-
-    public void Clickers(float clicks) =>
-        ClickersPerSecund += clicks;
+    public float GetClicker()
+    {
+        return Clickers;
+    }
 
 }
 

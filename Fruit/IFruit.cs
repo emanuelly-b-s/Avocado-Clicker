@@ -9,6 +9,7 @@ namespace Avocado_Cliker.Fruit;
 internal interface IFruit
 {
     string Name { get; }
-    float ClickersPerSecund { get; }
+
+    float SetClickers(float value);
 }
 

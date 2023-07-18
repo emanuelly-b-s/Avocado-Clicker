@@ -1,22 +1,30 @@
 using System.Windows.Forms;
+using Avocado_Cliker.Fruit;
 
-namespace Avocado_Cliker
+namespace Avocado_Cliker;
+
+public partial class Clicker : Form
 {
-    public partial class Clicker : Form
+    public Clicker()
     {
-        public Clicker()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
+    Avocado avocado_Clicker = new();
 
-        }
 
-        private void pictureBox1_Click(object sender, System.EventArgs e)
-        {
+    private void panel1_Paint(object sender, PaintEventArgs e)
+    {
 
-        }
+    }
+
+    private void avocado_clicker(object sender, System.EventArgs e)
+    {
+        avocado_Clicker.SetClickers(1);
+    }
+
+    private void textBox1_TextChanged(object sender, System.EventArgs e)
+    {
+        textBox1.Text = avocado_Clicker.GetClicker().ToString();
     }
 }

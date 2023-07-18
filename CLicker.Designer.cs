@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clicker));
             panel1 = new System.Windows.Forms.Panel();
+            clickerTxt = new System.Windows.Forms.Label();
             avocado = new System.Windows.Forms.PictureBox();
-            textBox1 = new System.Windows.Forms.TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)avocado).BeginInit();
             SuspendLayout();
@@ -39,7 +39,7 @@
             // panel1
             // 
             panel1.BackgroundImage = (System.Drawing.Image)resources.GetObject("panel1.BackgroundImage");
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(clickerTxt);
             panel1.Controls.Add(avocado);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
@@ -47,6 +47,15 @@
             panel1.Size = new System.Drawing.Size(800, 450);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
+            // 
+            // clickerTxt
+            // 
+            clickerTxt.AutoSize = true;
+            clickerTxt.Location = new System.Drawing.Point(69, 31);
+            clickerTxt.Name = "clickerTxt";
+            clickerTxt.Size = new System.Drawing.Size(0, 20);
+            clickerTxt.TabIndex = 1;
+            clickerTxt.Click += label1_Click;
             // 
             // avocado
             // 
@@ -60,14 +69,6 @@
             avocado.TabIndex = 0;
             avocado.TabStop = false;
             avocado.Click += avocado_clicker;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new System.Drawing.Point(376, 178);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(125, 27);
-            textBox1.TabIndex = 1;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // Clicker
             // 
@@ -87,6 +88,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox avocado;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label clickerTxt;
     }
 }

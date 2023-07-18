@@ -21,10 +21,12 @@ public partial class Clicker : Form
     private void avocado_clicker(object sender, System.EventArgs e)
     {
         avocado_Clicker.SetClickers(1);
+        float count_clickers = avocado_Clicker.GetClicker();
+        clickerTxt.Text = count_clickers.ToString();
     }
 
-    private void textBox1_TextChanged(object sender, System.EventArgs e)
+    private void label1_Click(object sender, System.EventArgs e)
     {
-        textBox1.Text = avocado_Clicker.GetClicker().ToString();
+
     }
 }

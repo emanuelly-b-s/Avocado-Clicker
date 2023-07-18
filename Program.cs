@@ -1,4 +1,7 @@
-namespace Cookie_Cliker
+using System;
+using System.Windows.Forms;
+
+namespace Avocado_Cliker
 {
     internal static class Program
     {

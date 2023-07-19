@@ -28,66 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clicker));
-            panel1 = new System.Windows.Forms.Panel();
-            clickerTxt = new System.Windows.Forms.Label();
-            avocado = new System.Windows.Forms.PictureBox();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)avocado).BeginInit();
+            pb = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pb).BeginInit();
             SuspendLayout();
             // 
-            // panel1
+            // pb
             // 
-            panel1.BackgroundImage = (System.Drawing.Image)resources.GetObject("panel1.BackgroundImage");
-            panel1.Controls.Add(clickerTxt);
-            panel1.Controls.Add(avocado);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(800, 450);
-            panel1.TabIndex = 0;
-            panel1.Paint += panel1_Paint;
-            // 
-            // clickerTxt
-            // 
-            clickerTxt.AutoSize = true;
-            clickerTxt.Location = new System.Drawing.Point(69, 31);
-            clickerTxt.Name = "clickerTxt";
-            clickerTxt.Size = new System.Drawing.Size(0, 20);
-            clickerTxt.TabIndex = 1;
-            clickerTxt.Click += label1_Click;
-            // 
-            // avocado
-            // 
-            avocado.BackColor = System.Drawing.Color.Transparent;
-            avocado.Cursor = System.Windows.Forms.Cursors.Hand;
-            avocado.Image = Properties.Resources.avocado;
-            avocado.Location = new System.Drawing.Point(3, 54);
-            avocado.Name = "avocado";
-            avocado.Size = new System.Drawing.Size(178, 172);
-            avocado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            avocado.TabIndex = 0;
-            avocado.TabStop = false;
-            avocado.Click += avocado_clicker;
+            pb.Dock = System.Windows.Forms.DockStyle.Fill;
+            pb.Location = new System.Drawing.Point(0, 0);
+            pb.Name = "pb";
+            pb.Size = new System.Drawing.Size(937, 471);
+            pb.TabIndex = 0;
+            pb.TabStop = false;
+            pb.MouseDown += pb_MouseDown;
+            pb.MouseMove += pb_MouseMove;
+            pb.MouseUp += pb_MouseUp;
             // 
             // Clicker
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 450);
-            Controls.Add(panel1);
+            ClientSize = new System.Drawing.Size(937, 471);
+            Controls.Add(pb);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "Clicker";
             Text = "Clicker";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)avocado).EndInit();
+            Load += Clicker_Load;
+            Shown += Clicker_Shown;
+            ((System.ComponentModel.ISupportInitialize)pb).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox avocado;
-        private System.Windows.Forms.Label clickerTxt;
+        private System.Windows.Forms.PictureBox pb;
     }
 }

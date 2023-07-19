@@ -57,19 +57,25 @@ public partial class Clicker : Form
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
 
-        avocadoStandar = avocadoRect = new RectangleF(
-            .02f * pb.Width, .02f * pb.Height,
-            .12f * pb.Width, .12f * pb.Width
+        avocadoStandar = new RectangleF(
+            .03f * pb.Width, .058f * pb.Height,
+            .11f * pb.Width, .11f * pb.Width
+        );
+
+
+        avocadoRect = new RectangleF(
+            .03f * pb.Width, .08f * pb.Height,
+            .11f * pb.Width, .11f * pb.Width
         );
 
         avocadoIsDown = new RectangleF(
             .02f * pb.Width, .02f * pb.Height,
-            .09f * pb.Width, .09f * pb.Width
+            .106f * pb.Width, .106f * pb.Width
         );
 
         avocadoUp = new RectangleF(
             .02f * pb.Width, .02f * pb.Height,
-            .14f * pb.Width, .14f * pb.Width
+            .11f * pb.Width, .11f * pb.Width
           );
 
         KeyPreview = true;

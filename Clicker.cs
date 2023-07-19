@@ -12,6 +12,7 @@ public partial class Clicker : Form
 
         bg = Bitmap.FromFile("../../../Images/Background/background.png") as Bitmap;
         avocado = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
+        
     }
 
     Avocado avocado_Clicker = new();
@@ -22,6 +23,7 @@ public partial class Clicker : Form
     Bitmap bg = null;
     Bitmap avocado = null;
     RectangleF avocadoRect = Rectangle.Empty;
+    RectangleF avocadoGeral = RectangleF.Empty;
     RectangleF avocadoIsDown = RectangleF.Empty;
 
     Point cursor = Point.Empty;
@@ -34,7 +36,7 @@ public partial class Clicker : Form
 
         if (avocadoRect.Contains(cursor) && isDown)
         {
-            g.DrawImage(avocado, avocadoIsDown);
+            avocadoRect = avocadoIsDown;
         }
     }
 
@@ -47,10 +49,25 @@ public partial class Clicker : Form
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
 
-        avocadoRect = new RectangleF(
+        avocadoGeral = avocadoRect = new RectangleF(
             .02f * pb.Width, .02f * pb.Height,
             .12f * pb.Width, .12f * pb.Width
         );
+        avocadoIsDown = new RectangleF(
+            .02f * pb.Width, .02f * pb.Height,
+            .09f * pb.Width, .09f * pb.Width
+        );
+
+        KeyPreview = true;
+
+        KeyDown += (s, e) =>
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Application.Exit();
+            }
+        };
+        
     }
 
     private void Clicker_Shown(object sender, System.EventArgs e)
@@ -66,8 +83,6 @@ public partial class Clicker : Form
     private void pb_MouseDown(object sender, MouseEventArgs e)
     {
         isDown = true;
-        avocadoIsDown = new RectangleF(.02f * pb.Width, .02f * pb.Height,
-             .30f * pb.Width, .30f * pb.Width);
 
     }
 

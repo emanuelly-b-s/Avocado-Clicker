@@ -12,7 +12,7 @@ internal interface IProduct
     void GetCrrActual(Product p);
 
     int GetLevelActual (Product p);
-    float GetPriceActual (Product p);
+    
 
     // public 
     // List<> : 

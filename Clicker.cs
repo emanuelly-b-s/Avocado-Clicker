@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Avocado_Cliker.Fruit;
+using Avocado_Cliker.Store;
 
 namespace Avocado_Cliker;
 
@@ -11,6 +12,7 @@ public partial class Clicker : Form
         InitializeComponent();
 
         bg = Bitmap.FromFile("../../../Images/Background/background.png") as Bitmap;
+        vovoJujuPhoto = Bitmap.FromFile("../../../Images/Product/GannerJuju.png") as Bitmap;
         avocado = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
 
     }
@@ -22,14 +24,17 @@ public partial class Clicker : Form
     Bitmap bg = null;
     Bitmap avocado = null;
     Bitmap bmp = null;
+    Bitmap vovoJujuPhoto = null;
 
 
     RectangleF avocadoRect = Rectangle.Empty;
     RectangleF avocadoStandar = RectangleF.Empty;
     RectangleF avocadoIsDown = RectangleF.Empty;
     RectangleF avocadoUp = RectangleF.Empty;
+    RectangleF vovoPhoto = RectangleF.Empty;
 
 
+    Product vovoJuju = new VovoJuju("teste");
     Point cursor = Point.Empty;
     bool isDown = false;
 
@@ -38,8 +43,10 @@ public partial class Clicker : Form
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocado, avocadoRect);
 
+        g.DrawImage(vovoJujuPhoto, vovoPhoto);
+
         if (avocadoRect.Contains(cursor) && isDown)
-            avocadoRect = avocadoIsDown;    
+            avocadoRect = avocadoIsDown;
 
 
         if (avocadoRect.Contains(cursor) && !isDown)
@@ -77,6 +84,11 @@ public partial class Clicker : Form
             .02f * pb.Width, .02f * pb.Height,
             .11f * pb.Width, .11f * pb.Width
           );
+
+        vovoPhoto = new RectangleF(
+            .20f * pb.Width, .20f * pb.Height,
+            .11f * pb.Width, .11f * pb.Width
+           );
 
         KeyPreview = true;
 

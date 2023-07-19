@@ -11,9 +11,10 @@ internal class Product : IProduct, IPrice, ILevel
     private int _level;
     private float _priceConcrect;
 
-    public string Name => throw new NotImplementedException();
+    public string Name { get; }
 
-
+    public Product(string name) =>  this.Name = name;
+    
     public void GetCrrActual(Product p)
     {
         throw new NotImplementedException();

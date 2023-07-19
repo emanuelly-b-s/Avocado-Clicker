@@ -12,19 +12,23 @@ public partial class Clicker : Form
 
         bg = Bitmap.FromFile("../../../Images/Background/background.png") as Bitmap;
         avocado = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
-        
+
     }
 
     Avocado avocado_Clicker = new();
-    Bitmap bmp = null;
     Graphics g = null;
     bool running = true;
 
     Bitmap bg = null;
     Bitmap avocado = null;
+    Bitmap bmp = null;
+
+
     RectangleF avocadoRect = Rectangle.Empty;
-    RectangleF avocadoGeral = RectangleF.Empty;
+    RectangleF avocadoStandar = RectangleF.Empty;
     RectangleF avocadoIsDown = RectangleF.Empty;
+    RectangleF avocadoUp = RectangleF.Empty;
+
 
     Point cursor = Point.Empty;
     bool isDown = false;
@@ -35,9 +39,13 @@ public partial class Clicker : Form
         g.DrawImage(avocado, avocadoRect);
 
         if (avocadoRect.Contains(cursor) && isDown)
-        {
-            avocadoRect = avocadoIsDown;
-        }
+            avocadoRect = avocadoIsDown;    
+
+
+        if (avocadoRect.Contains(cursor) && !isDown)
+            avocadoRect = avocadoUp;
+
+
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
@@ -49,14 +57,20 @@ public partial class Clicker : Form
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
 
-        avocadoGeral = avocadoRect = new RectangleF(
+        avocadoStandar = avocadoRect = new RectangleF(
             .02f * pb.Width, .02f * pb.Height,
             .12f * pb.Width, .12f * pb.Width
         );
+
         avocadoIsDown = new RectangleF(
             .02f * pb.Width, .02f * pb.Height,
             .09f * pb.Width, .09f * pb.Width
         );
+
+        avocadoUp = new RectangleF(
+            .02f * pb.Width, .02f * pb.Height,
+            .14f * pb.Width, .14f * pb.Width
+          );
 
         KeyPreview = true;
 
@@ -67,7 +81,7 @@ public partial class Clicker : Form
                 Application.Exit();
             }
         };
-        
+
     }
 
     private void Clicker_Shown(object sender, System.EventArgs e)

@@ -45,6 +45,9 @@ public partial class Clicker : Form
 
         g.DrawImage(vovoJujuPhoto, vovoPhoto);
 
+        if (vovoPhoto.Contains(cursor))
+            MessageBox.Show(vovoJuju.Name);
+
         if (avocadoRect.Contains(cursor) && isDown)
             avocadoRect = avocadoIsDown;
 
@@ -59,6 +62,8 @@ public partial class Clicker : Form
     {
         this.WindowState = FormWindowState.Maximized;
         this.FormBorderStyle = FormBorderStyle.None;
+
+        VovoJuju vovoJuju = new VovoJuju("vovo");
 
         bmp = new Bitmap(pb.Width, pb.Height);
         g = Graphics.FromImage(bmp);

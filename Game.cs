@@ -8,11 +8,24 @@ namespace Avocado_Cliker;
 
 public class Game
 {
-    public int Avocados { get; private set; }
+    public float Avocados { get; private set; }
+    public float AvocadoPerClick { get; private set; } = 1;
 
-
-    public void Click()
+    private Game() { }
+    private static Game instance;
+    
+    public static Game Current
     {
-        Avocados++;
+        get
+        {
+            if(instance == null)
+                instance = new Game();
+
+            return instance;
+        }
     }
+
+    public void Click() 
+            => Avocados += AvocadoPerClick;
+    
 }

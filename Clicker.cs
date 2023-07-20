@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Avocado_Cliker.Fruit;
 using Avocado_Cliker.Store;
@@ -34,27 +35,44 @@ public partial class Clicker : Form
 
     Label label = new Label();
 
-
     Product grannyJuju = new GrannyJuju("teste");
     Avocado avocado = new Avocado();
 
     Point cursor = Point.Empty;
-    
+
     bool isDown = false;
     bool inAvocadoDown = false;
 
+    LinearGradientBrush linGrBrush = new LinearGradientBrush(
+       new Point(0, 10),
+       new Point(200, 10),
+       Color.FromArgb(255, 255, 0, 0),   
+       Color.FromArgb(255, 0, 0, 255)
+    );
+
+
     private void Draw()
     {
+
+        Pen pen = new Pen(linGrBrush);
+
+        g.DrawRectangle(pen, 100, 100, Width, Height);
+
+        StringFormat drawFormat = new StringFormat();
+        drawFormat.Alignment = StringAlignment.Center;
+
+        RectangleF drawRect = new RectangleF(100, 50, Width, Height);
+        SolidBrush drawBrush = new SolidBrush(Color.Black);
+        Font drawFont = new Font("Arial", 16);
+        // Draw string to screen.
+        g.DrawString(Game.Current.Avocados.ToString(), drawFont, drawBrush, drawRect, drawFormat);
+
+
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocadoPicture, avocadoRect);
 
         g.DrawImage(grannyPicture, grannyRect);
 
-        // if (grannyRect.Contains(cursor))
-        //MessageBox.Show(grannyJuju.GetLevelActual(grannyJuju).ToString());
-
-
-        //animations to avocado
         if (avocadoRect.Contains(cursor) && isDown)
         {
             avocadoRect = avocadoIsDown;
@@ -67,27 +85,17 @@ public partial class Clicker : Form
             if (inAvocadoDown)
             {
                 inAvocadoDown = false;
-                // game.Click(); 
+                Game.Current.Click();
             }
         }
 
         if (!avocadoRect.Contains(cursor))
             avocadoRect = avocadoStandar;
-
-        ////methods avocado
-        //if (avocadoRect.Contains(cursor) && isDown)
-        //{
-        //    avocado.SetClickers(1);
-        //    label.Text = (avocado.GetClicker().ToString());
-
-        //    label.Show();
-
-        //}
-
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
     {
+
         this.WindowState = FormWindowState.Maximized;
         this.FormBorderStyle = FormBorderStyle.None;
 
@@ -109,7 +117,7 @@ public partial class Clicker : Form
             .0325f * pb.Width, .03f * pb.Height + .0075f * pb.Width / 2,
             .0925f * pb.Width, .0925f * pb.Width
         );
-        
+
         avocadoUp = new RectangleF(
             .0275f * pb.Width, .03f * pb.Height - .0075f * pb.Width / 2,
             .1075f * pb.Width, .1075f * pb.Width

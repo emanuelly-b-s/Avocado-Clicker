@@ -7,13 +7,16 @@ namespace Avocado_Cliker.Store;
 
 internal interface ILevel
 {
-    void SetLevel();
+    void SetLevel(int lXp);
 }
 
 public abstract class LevelConcrect : ILevel
 {
-    // Product _product;
-    int _crrLevel { get; set; } = 0;
-    public void SetLevel() => _crrLevel += 1;
-    // public int GetLevel(_product p) => this._crrLevel;
+    int _initialLevel { get; set; } = 0;
+    int _crrLevel { get; set; }
+    public void SetLevel(int lXp) 
+        => _crrLevel += lXp; 
+
+    public int GetLevel () 
+        => _crrLevel;
 }

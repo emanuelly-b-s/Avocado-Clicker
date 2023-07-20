@@ -33,13 +33,15 @@ public partial class Clicker : Form
 
 
     Label label = new Label();
-    
 
-    Product grannyJuju = new VovoJuju("teste");
+
+    Product grannyJuju = new GrannyJuju("teste");
     Avocado avocado = new Avocado();
 
     Point cursor = Point.Empty;
+    
     bool isDown = false;
+    bool inAvocadoDown = false;
 
     private void Draw()
     {
@@ -54,20 +56,34 @@ public partial class Clicker : Form
 
         //animations to avocado
         if (avocadoRect.Contains(cursor) && isDown)
+        {
             avocadoRect = avocadoIsDown;
+            inAvocadoDown = true;
+        }
 
         if (avocadoRect.Contains(cursor) && !isDown)
-            avocadoRect = avocadoUp;
-
-        //methods avocado
-        if (avocadoRect.Contains(cursor) && isDown)
         {
-            avocado.SetClickers(1);
-            label.Text = (avocado.GetClicker().ToString());
-            label.Location = new Point(cursor.X + 8, cursor.Y);
-            
+            avocadoRect = avocadoUp;
+            if (inAvocadoDown)
+            {
+                inAvocadoDown = false;
+                // game.Click(); 
+            }
         }
-            
+
+        if (!avocadoRect.Contains(cursor))
+            avocadoRect = avocadoStandar;
+
+        ////methods avocado
+        //if (avocadoRect.Contains(cursor) && isDown)
+        //{
+        //    avocado.SetClickers(1);
+        //    label.Text = (avocado.GetClicker().ToString());
+
+        //    label.Show();
+
+        //}
+
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
@@ -85,24 +101,21 @@ public partial class Clicker : Form
         label.Show();
         //avocado states
         avocadoStandar = new RectangleF(
-            .03f * pb.Width, .058f * pb.Height,
-            .11f * pb.Width, .11f * pb.Width
-        );
-
-        avocadoRect = new RectangleF(
-            .03f * pb.Width, .08f * pb.Height,
-            .11f * pb.Width, .11f * pb.Width
+            .03f * pb.Width, .03f * pb.Height,
+            .10f * pb.Width, .10f * pb.Width
         );
 
         avocadoIsDown = new RectangleF(
-            .02f * pb.Width, .02f * pb.Height,
-            .106f * pb.Width, .106f * pb.Width
+            .0325f * pb.Width, .03f * pb.Height + .0075f * pb.Width / 2,
+            .0925f * pb.Width, .0925f * pb.Width
+        );
+        
+        avocadoUp = new RectangleF(
+            .0275f * pb.Width, .03f * pb.Height - .0075f * pb.Width / 2,
+            .1075f * pb.Width, .1075f * pb.Width
         );
 
-        avocadoUp = new RectangleF(
-            .02f * pb.Width, .02f * pb.Height,
-            .11f * pb.Width, .11f * pb.Width
-         );
+        avocadoRect = avocadoStandar;
 
 
 

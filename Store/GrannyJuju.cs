@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Avocado_Cliker.Store;
 
-internal class VovoJuju : Product
+internal class GrannyJuju : Product
 {
     public string Name { get; }
     private int _level;
     private float _priceConcrect;
 
-    public VovoJuju(string name) : base(name) => Name = name;
+    public GrannyJuju(string name) : base(name) => Name = name;
 
     
 }

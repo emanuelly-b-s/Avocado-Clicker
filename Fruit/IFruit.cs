@@ -12,4 +12,3 @@ internal interface IFruit
 
     float SetClickers(float value);
 }
-

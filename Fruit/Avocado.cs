@@ -14,10 +14,7 @@ internal class Avocado : IFruit
 
     public float SetClickers(float value) => Clickers += value;
 
-    public float GetClicker()
-    {
-        return Clickers;
-    }
+    public float GetClicker() => Clickers;
 
 }
 

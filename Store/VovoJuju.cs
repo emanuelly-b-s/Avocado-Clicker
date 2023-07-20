@@ -12,4 +12,6 @@ internal class VovoJuju : Product
     private float _priceConcrect;
 
     public VovoJuju(string name) : base(name) => Name = name;
+
+    
 }

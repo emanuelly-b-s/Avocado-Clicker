@@ -17,7 +17,6 @@ public partial class Clicker : Form
 
     }
 
-    Avocado avocado_Clicker = new();
     Graphics g = null;
     bool running = true;
 
@@ -26,15 +25,15 @@ public partial class Clicker : Form
     Bitmap bmp = null;
     Bitmap vovoJujuPhoto = null;
 
-
     RectangleF avocadoRect = Rectangle.Empty;
     RectangleF avocadoStandar = RectangleF.Empty;
     RectangleF avocadoIsDown = RectangleF.Empty;
     RectangleF avocadoUp = RectangleF.Empty;
-    RectangleF vovoPhoto = RectangleF.Empty;
+    RectangleF grannyRect = RectangleF.Empty;
 
 
-    Product vovoJuju = new VovoJuju("teste");
+    Product grannyJuju = new VovoJuju("teste");
+
     Point cursor = Point.Empty;
     bool isDown = false;
 
@@ -43,10 +42,10 @@ public partial class Clicker : Form
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocado, avocadoRect);
 
-        g.DrawImage(vovoJujuPhoto, vovoPhoto);
+        g.DrawImage(vovoJujuPhoto, grannyRect);
 
-        if (vovoPhoto.Contains(cursor))
-            MessageBox.Show(vovoJuju.Name);
+        if (grannyRect.Contains(cursor))
+            MessageBox.Show(grannyJuju.GetLevelActual(grannyJuju).ToString());
 
         if (avocadoRect.Contains(cursor) && isDown)
             avocadoRect = avocadoIsDown;
@@ -55,7 +54,10 @@ public partial class Clicker : Form
         if (avocadoRect.Contains(cursor) && !isDown)
             avocadoRect = avocadoUp;
 
+        if (isDown)
+        {
 
+        }
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
@@ -63,17 +65,16 @@ public partial class Clicker : Form
         this.WindowState = FormWindowState.Maximized;
         this.FormBorderStyle = FormBorderStyle.None;
 
-        VovoJuju vovoJuju = new VovoJuju("vovo");
 
         bmp = new Bitmap(pb.Width, pb.Height);
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
 
+        //avocado states
         avocadoStandar = new RectangleF(
             .03f * pb.Width, .058f * pb.Height,
             .11f * pb.Width, .11f * pb.Width
         );
-
 
         avocadoRect = new RectangleF(
             .03f * pb.Width, .08f * pb.Height,
@@ -90,11 +91,14 @@ public partial class Clicker : Form
             .11f * pb.Width, .11f * pb.Width
           );
 
-        vovoPhoto = new RectangleF(
+
+        //granny states
+        grannyRect = new RectangleF(
             .20f * pb.Width, .20f * pb.Height,
             .11f * pb.Width, .11f * pb.Width
            );
 
+        //key to exit
         KeyPreview = true;
 
         KeyDown += (s, e) =>
@@ -118,18 +122,14 @@ public partial class Clicker : Form
     }
 
     private void pb_MouseDown(object sender, MouseEventArgs e)
-    {
-        isDown = true;
-
-    }
+        => isDown = true;
+    
 
     private void pb_MouseMove(object sender, MouseEventArgs e)
-    {
-        cursor = e.Location;
-    }
+        => cursor = e.Location;
+    
 
     private void pb_MouseUp(object sender, MouseEventArgs e)
-    {
-        isDown = false;
-    }
+        => isDown = false;
+
 }

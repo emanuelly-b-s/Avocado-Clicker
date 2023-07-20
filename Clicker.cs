@@ -12,8 +12,8 @@ public partial class Clicker : Form
         InitializeComponent();
 
         bg = Bitmap.FromFile("../../../Images/Background/background.png") as Bitmap;
-        vovoJujuPhoto = Bitmap.FromFile("../../../Images/Product/GannerJuju.png") as Bitmap;
-        avocado = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
+        grannyPicture = Bitmap.FromFile("../../../Images/Product/GannerJuju.png") as Bitmap;
+        avocadoPicture = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
 
     }
 
@@ -21,9 +21,9 @@ public partial class Clicker : Form
     bool running = true;
 
     Bitmap bg = null;
-    Bitmap avocado = null;
+    Bitmap avocadoPicture = null;
     Bitmap bmp = null;
-    Bitmap vovoJujuPhoto = null;
+    Bitmap grannyPicture = null;
 
     RectangleF avocadoRect = Rectangle.Empty;
     RectangleF avocadoStandar = RectangleF.Empty;
@@ -32,7 +32,11 @@ public partial class Clicker : Form
     RectangleF grannyRect = RectangleF.Empty;
 
 
+    Label label = new Label();
+    
+
     Product grannyJuju = new VovoJuju("teste");
+    Avocado avocado = new Avocado();
 
     Point cursor = Point.Empty;
     bool isDown = false;
@@ -40,24 +44,30 @@ public partial class Clicker : Form
     private void Draw()
     {
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
-        g.DrawImage(avocado, avocadoRect);
+        g.DrawImage(avocadoPicture, avocadoRect);
 
-        g.DrawImage(vovoJujuPhoto, grannyRect);
+        g.DrawImage(grannyPicture, grannyRect);
 
-        if (grannyRect.Contains(cursor))
-            MessageBox.Show(grannyJuju.GetLevelActual(grannyJuju).ToString());
+        // if (grannyRect.Contains(cursor))
+        //MessageBox.Show(grannyJuju.GetLevelActual(grannyJuju).ToString());
 
+
+        //animations to avocado
         if (avocadoRect.Contains(cursor) && isDown)
             avocadoRect = avocadoIsDown;
-
 
         if (avocadoRect.Contains(cursor) && !isDown)
             avocadoRect = avocadoUp;
 
-        if (isDown)
+        //methods avocado
+        if (avocadoRect.Contains(cursor) && isDown)
         {
-
+            avocado.SetClickers(1);
+            label.Text = (avocado.GetClicker().ToString());
+            label.Location = new Point(cursor.X + 8, cursor.Y);
+            
         }
+            
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
@@ -70,6 +80,9 @@ public partial class Clicker : Form
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
 
+        //label clicks
+
+        label.Show();
         //avocado states
         avocadoStandar = new RectangleF(
             .03f * pb.Width, .058f * pb.Height,
@@ -89,14 +102,15 @@ public partial class Clicker : Form
         avocadoUp = new RectangleF(
             .02f * pb.Width, .02f * pb.Height,
             .11f * pb.Width, .11f * pb.Width
-          );
+         );
+
 
 
         //granny states
         grannyRect = new RectangleF(
             .20f * pb.Width, .20f * pb.Height,
             .11f * pb.Width, .11f * pb.Width
-           );
+        );
 
         //key to exit
         KeyPreview = true;
@@ -123,11 +137,10 @@ public partial class Clicker : Form
 
     private void pb_MouseDown(object sender, MouseEventArgs e)
         => isDown = true;
-    
+
 
     private void pb_MouseMove(object sender, MouseEventArgs e)
         => cursor = e.Location;
-    
 
     private void pb_MouseUp(object sender, MouseEventArgs e)
         => isDown = false;

@@ -9,7 +9,7 @@ namespace Avocado_Cliker.Fruit;
 internal class Avocado : IFruit
 {
     public string Name { get; } = "Avocado";
-    private float Clickers { get; set; }
+    public float Clickers { get; set; }
     public float clickersPerSecund;
 
     public float SetClickers(float value) => Clickers += value;

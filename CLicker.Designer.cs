@@ -40,7 +40,7 @@
             pb.Size = new System.Drawing.Size(937, 471);
             pb.TabIndex = 0;
             pb.TabStop = false;
-            pb.MouseDown += pb_MouseUp;
+            pb.MouseDown += pb_MouseDown;
             pb.MouseMove += pb_MouseMove;
             pb.MouseUp += pb_MouseUp;
             // 

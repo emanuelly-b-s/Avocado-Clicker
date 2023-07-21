@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Avocado_Cliker.Store;
+namespace Avocado_Cliker.Marketplace;
 
 public class Product
 {
@@ -12,19 +12,14 @@ public class Product
     public int Quantity;
     public string Name { get; }
 
+    private Store _store;
     public Product(string name) => this.Name = name;
 
     public void AddProduct()
-        => Quantity += 1;
+        => Quantity++;
 
-    //public List<Product> GetProducts(Product p)
-    //    => myProducts.GetProducts(p);
-
-    public void GetCrrActual(Product p)
-    {
-        throw new NotImplementedException();
-    }
-
+    public void AddNewProduct(Product p)
+        => _store.AddProduct(p);
 
     public int GetLevelActual()
     {

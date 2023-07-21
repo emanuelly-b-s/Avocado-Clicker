@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Avocado_Cliker.Store;
+namespace Avocado_Cliker.Marketplace;
 
 internal class GrannyJuju : Product
 {

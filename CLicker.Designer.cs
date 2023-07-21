@@ -62,5 +62,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pb;
+        private System.Windows.Forms.PictureBox pbStore;
     }
 }

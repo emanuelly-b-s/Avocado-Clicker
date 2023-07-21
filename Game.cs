@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avocado_Cliker.Store;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,13 @@ namespace Avocado_Cliker;
 
 public class Game
 {
-    public float Avocados { get; private set; }
+    public float Avocados { get; private set; } = 0;
     public float AvocadoPerClick { get; private set; } = 1;
 
     private Game() { }
     private static Game instance;
+
+    private GrannyJuju GrannyJuju { get; set; }
     
     public static Game Current
     {
@@ -27,5 +30,8 @@ public class Game
 
     public void Click() 
             => Avocados += AvocadoPerClick;
+
+    public void BuyGrannyJuju()
+        => GrannyJuju.GetLevelActual();
     
 }

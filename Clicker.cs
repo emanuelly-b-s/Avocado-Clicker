@@ -13,8 +13,9 @@ public partial class Clicker : Form
         InitializeComponent();
 
         bg = Bitmap.FromFile("../../../Images/Background/background.png") as Bitmap;
-        grannyPicture = Bitmap.FromFile("../../../Images/Product/GannerJuju.png") as Bitmap;
+        grannyPicture = Bitmap.FromFile("../../../Images/Product/Gann.png") as Bitmap;
         avocadoPicture = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
+        bgStore = Bitmap.FromFile("../../../Images/Background/bgStore.png") as Bitmap;
 
     }
 
@@ -22,18 +23,19 @@ public partial class Clicker : Form
     bool running = true;
 
     Bitmap bg = null;
-    Bitmap avocadoPicture = null;
     Bitmap bmp = null;
+    Bitmap avocadoPicture = null;
     Bitmap grannyPicture = null;
+
+    Bitmap bgStore = null;
 
     RectangleF avocadoRect = Rectangle.Empty;
     RectangleF avocadoStandar = RectangleF.Empty;
     RectangleF avocadoIsDown = RectangleF.Empty;
     RectangleF avocadoUp = RectangleF.Empty;
     RectangleF grannyRect = RectangleF.Empty;
+    RectangleF productReact = RectangleF.Empty;
 
-
-    Label label = new Label();
 
     Product grannyJuju = new GrannyJuju("teste");
     Avocado avocado = new Avocado();
@@ -46,7 +48,7 @@ public partial class Clicker : Form
     LinearGradientBrush linGrBrush = new LinearGradientBrush(
        new Point(0, 10),
        new Point(200, 10),
-       Color.FromArgb(255, 255, 0, 0),   
+       Color.FromArgb(255, 255, 0, 0),
        Color.FromArgb(255, 0, 0, 255)
     );
 
@@ -55,23 +57,24 @@ public partial class Clicker : Form
     {
 
         Pen pen = new Pen(linGrBrush);
-
-        g.DrawRectangle(pen, 100, 100, Width, Height);
-
+        //g.DrawRectangle(pen, 100, 100, Width, Height);
         StringFormat drawFormat = new StringFormat();
         drawFormat.Alignment = StringAlignment.Center;
-
         RectangleF drawRect = new RectangleF(100, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         Font drawFont = new Font("Arial", 16);
+
+
         // Draw string to screen.
         g.DrawString(Game.Current.Avocados.ToString(), drawFont, drawBrush, drawRect, drawFormat);
-
+        pb.Refresh();
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocadoPicture, avocadoRect);
+        g.DrawImage(bgStore, productReact);
 
         g.DrawImage(grannyPicture, grannyRect);
+
 
         if (avocadoRect.Contains(cursor) && isDown)
         {
@@ -91,6 +94,9 @@ public partial class Clicker : Form
 
         if (!avocadoRect.Contains(cursor))
             avocadoRect = avocadoStandar;
+
+        //if (grannyRect.Contains(cursor) && isDown)
+        //    grannyJuju.GetLevelActual();
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
@@ -99,14 +105,12 @@ public partial class Clicker : Form
         this.WindowState = FormWindowState.Maximized;
         this.FormBorderStyle = FormBorderStyle.None;
 
-
+        float heightRectStore = .20f * pb.Height;
         bmp = new Bitmap(pb.Width, pb.Height);
+
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
 
-        //label clicks
-
-        label.Show();
         //avocado states
         avocadoStandar = new RectangleF(
             .03f * pb.Width, .03f * pb.Height,
@@ -125,13 +129,17 @@ public partial class Clicker : Form
 
         avocadoRect = avocadoStandar;
 
-
-
         //granny states
         grannyRect = new RectangleF(
-            .20f * pb.Width, .20f * pb.Height,
-            .11f * pb.Width, .11f * pb.Width
+            .92f * pb.Width, heightRectStore,
+            .08f * pb.Width, .08f * pb.Width
         );
+
+        productReact = new RectangleF(
+            .85f * pb.Width, heightRectStore,
+            .15f * pb.Width, .15f * pb.Height
+        );
+
 
         //key to exit
         KeyPreview = true;
@@ -143,7 +151,6 @@ public partial class Clicker : Form
                 Application.Exit();
             }
         };
-
     }
 
     private void Clicker_Shown(object sender, System.EventArgs e)
@@ -158,7 +165,6 @@ public partial class Clicker : Form
 
     private void pb_MouseDown(object sender, MouseEventArgs e)
         => isDown = true;
-
 
     private void pb_MouseMove(object sender, MouseEventArgs e)
         => cursor = e.Location;

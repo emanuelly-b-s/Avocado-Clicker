@@ -8,10 +8,13 @@ namespace Avocado_Cliker.Store;
 
 internal interface IStore
 {
-    string Name { get; }
-    int _crrActual { get; }
+    void AddProduct(Product product);
+}
 
-    int GetCrrActual(Product p);
-
+internal abstract class Store : IStore
+{
+    List<Product> newProducts { get; set; } 
+    public void AddProduct(Product product)
+        => newProducts.Add(product);
 }
 

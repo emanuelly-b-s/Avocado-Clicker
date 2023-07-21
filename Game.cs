@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avocado_Cliker.Store;
 
 namespace Avocado_Cliker;
 
@@ -16,6 +17,8 @@ public class Game
     private static Game instance;
 
     private GrannyJuju GrannyJuju { get; set; }
+
+    private Product product { get; set; }
     
     public static Game Current
     {
@@ -31,7 +34,10 @@ public class Game
     public void Click() 
             => Avocados += AvocadoPerClick;
 
-    public void BuyGrannyJuju()
-        => GrannyJuju.GetLevelActual();
+    public void BuyProduct(Product p)
+        => p.AddProduct();
+
+    public int GetQuantity(Product p)
+        => p.Quantity;
     
 }

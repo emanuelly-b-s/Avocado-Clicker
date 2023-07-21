@@ -13,5 +13,4 @@ internal class GrannyJuju : Product
 
     public GrannyJuju(string name) : base(name) => Name = name;
 
-    
 }

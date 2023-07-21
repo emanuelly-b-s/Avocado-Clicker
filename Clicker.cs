@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -36,7 +37,6 @@ public partial class Clicker : Form
     RectangleF grannyRect = RectangleF.Empty;
     RectangleF productReact = RectangleF.Empty;
 
-
     Product grannyJuju = new GrannyJuju("teste");
     Avocado avocado = new Avocado();
 
@@ -66,7 +66,7 @@ public partial class Clicker : Form
 
 
         // Draw string to screen.
-        g.DrawString(Game.Current.Avocados.ToString(), drawFont, drawBrush, drawRect, drawFormat);
+        g.DrawString(Game.Current.GetQuantity(grannyJuju).ToString(), drawFont, drawBrush, drawRect, drawFormat);
         pb.Refresh();
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
@@ -95,8 +95,18 @@ public partial class Clicker : Form
         if (!avocadoRect.Contains(cursor))
             avocadoRect = avocadoStandar;
 
-        //if (grannyRect.Contains(cursor) && isDown)
-        //    grannyJuju.GetLevelActual();
+        if (grannyRect.Contains(cursor) && isDown)
+        {
+            Game.Current.BuyProduct(grannyJuju);
+
+
+ 
+            //foreach (var item in myProducts)
+            //{
+            //    Console.WriteLine(item);
+            //}
+        }
+
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)

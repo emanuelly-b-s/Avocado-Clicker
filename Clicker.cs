@@ -66,8 +66,15 @@ public partial class Clicker : Form
 
 
         // Draw string to screen.
-        g.DrawString(Game.Current.GetQuantity(grannyJuju).ToString(), drawFont, drawBrush, drawRect, drawFormat);
-        pb.Refresh();
+        var listProducts = Game.Current.GetProducts();
+
+        foreach (var item in listProducts)
+        {
+            g.DrawString(item.Name, drawFont, drawBrush, drawRect, drawFormat);
+            pb.Refresh();
+
+        }
+
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocadoPicture, avocadoRect);
@@ -100,7 +107,7 @@ public partial class Clicker : Form
             Game.Current.BuyProduct(grannyJuju);
 
 
- 
+
             //foreach (var item in myProducts)
             //{
             //    Console.WriteLine(item);

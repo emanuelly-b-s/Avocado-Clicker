@@ -15,20 +15,12 @@ public class Game
 
     private List<Product> Products { get; set; } = new List<Product>();
 
-
-    private Game()
-    {
-        //foreach (var item in product)
-        //{
-        //    MyStore.AddProduct(item);
-        //}
-    }
+    private Game() { }
 
     private static Game instance;
 
     private Store MyStore { get; set; }
 
-     GrannyJuju grannyJuju = new GrannyJuju("vovo");
 
     private Product Product { get; set; }
 
@@ -38,9 +30,13 @@ public class Game
         get
         {
             if(instance == null)
-                instance = new Game(
-                    );
-
+            {
+                instance = new Game();
+                GrannyJuju grannyJuju = new GrannyJuju("vovo");
+                instance.Products.Add(grannyJuju);
+                instance.Products.Add(grannyJuju);
+                instance.Products.Add(grannyJuju);
+            }
             return instance;
         }
     }
@@ -50,10 +46,12 @@ public class Game
         => Avocados += AvocadoPerClick;
     
 
-
     public void BuyProduct(Product p)
         => p.AddProduct();
 
     public int GetQuantity(Product p)
         => p.Quantity;
+
+    public List<Product> GetProducts() 
+        => this.Products;
 }

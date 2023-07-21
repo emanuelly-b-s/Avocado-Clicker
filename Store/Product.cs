@@ -9,7 +9,7 @@ public class Product
 {
     public int Level;
     public float Price { get; set; }
-    public int Quantity;
+    public int Quantity { get; set; } = 5;
     public string Name { get; set; }
 
     public Product(string name)

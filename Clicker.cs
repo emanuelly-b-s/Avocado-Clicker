@@ -160,9 +160,6 @@ public partial class Clicker : Form
             .15f * pb.Width, .15f * pb.Height
         );
 
-
-
-
         //key to exit
         KeyPreview = true;
 

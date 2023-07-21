@@ -7,10 +7,8 @@ namespace Avocado_Cliker.Marketplace;
 
 internal class GrannyJuju : Product
 {
-    public string Name { get; }
-    private int _level;
-    private float _priceConcrect;
 
-    public GrannyJuju(string name) : base(name) => Name = name;
+    public GrannyJuju(string name) : base(name)
+        => Price = 6f;
 
 }

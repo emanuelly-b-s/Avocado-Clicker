@@ -8,18 +8,18 @@ namespace Avocado_Cliker.Marketplace;
 public class Product
 {
     public int Level;
-    public float Price;
+    public float Price { get; set; }
     public int Quantity;
-    public string Name { get; }
+    public string Name { get; set; }
 
-    private Store _store;
-    public Product(string name) => this.Name = name;
+    public Product(string name)
+        => this.Name = name;
+
+    public float UpdatePrice()
+        => Price += Quantity * .05f;
 
     public void AddProduct()
         => Quantity++;
-
-    public void AddNewProduct(Product p)
-        => _store.AddProduct(p);
 
     public int GetLevelActual()
     {

@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace Avocado_Cliker.Fruit;
 
-internal class Avocado : IFruit
+internal class Avocado
 {
     public string Name { get; } = "Avocado";
-    public float Clickers { get; set; }
-    public float clickersPerSecund;
+    private float Avocados { get; set; } = 0;
+    private float AvocadosPerClick;
 
-    public float SetClickers(float value) => Clickers += value;
+    public float ClickesAvocados(float value)
+        => Avocados += value;
 
-    public float GetClicker() => Clickers;
+    public float GetAvocados()
+        => Avocados;
 
+    public float BuyAnyProd(float value)
+        => Avocados -= value;
 }
 

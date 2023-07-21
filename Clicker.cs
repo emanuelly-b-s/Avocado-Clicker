@@ -44,6 +44,7 @@ public partial class Clicker : Form
 
     bool isDown = false;
     bool inAvocadoDown = false;
+    bool inProductDown = false;
 
     LinearGradientBrush linGrBrush = new LinearGradientBrush(
        new Point(0, 10),
@@ -61,18 +62,20 @@ public partial class Clicker : Form
         StringFormat drawFormat = new StringFormat();
         drawFormat.Alignment = StringAlignment.Center;
         RectangleF drawRect = new RectangleF(100, 50, Width, Height);
+        RectangleF drawRecte = new RectangleF(50, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         Font drawFont = new Font("Arial", 16);
 
+
+        g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, drawRect, drawFormat);
 
         // Draw string to screen.
         var listProducts = Game.Current.GetProducts();
 
         foreach (var item in listProducts)
         {
-            g.DrawString(item.Name, drawFont, drawBrush, drawRect, drawFormat);
+            g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, drawFormat);
             pb.Refresh();
-
         }
 
 
@@ -81,6 +84,7 @@ public partial class Clicker : Form
         g.DrawImage(bgStore, productReact);
 
         g.DrawImage(grannyPicture, grannyRect);
+
 
 
         if (avocadoRect.Contains(cursor) && isDown)
@@ -102,18 +106,17 @@ public partial class Clicker : Form
         if (!avocadoRect.Contains(cursor))
             avocadoRect = avocadoStandar;
 
+
+
         if (grannyRect.Contains(cursor) && isDown)
+            inProductDown = true;
+
+        if (grannyRect.Contains(cursor) && !isDown && inProductDown)
         {
-            Game.Current.BuyProduct(grannyJuju);
-
-
-
-            //foreach (var item in myProducts)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            //inProductDown = false;
+            //Game.Current.BuyProduct(grannyJuju);
+            Game.Current.UpdatePrice(grannyJuju);
         }
-
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
@@ -156,6 +159,8 @@ public partial class Clicker : Form
             .85f * pb.Width, heightRectStore,
             .15f * pb.Width, .15f * pb.Height
         );
+
+
 
 
         //key to exit

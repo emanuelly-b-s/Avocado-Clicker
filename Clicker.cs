@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using Avocado_Cliker.Fruit;
 using Avocado_Cliker.Marketplace;
+using static Avocado_Cliker.Marketplace.Product;
 
 namespace Avocado_Cliker;
 
@@ -37,9 +40,6 @@ public partial class Clicker : Form
     RectangleF grannyRect = RectangleF.Empty;
     RectangleF productReact = RectangleF.Empty;
 
-    Product grannyJuju = new GrannyJuju("teste");
-    Avocado avocado = new Avocado();
-
     Point cursor = Point.Empty;
 
     bool isDown = false;
@@ -53,6 +53,9 @@ public partial class Clicker : Form
        Color.FromArgb(255, 0, 0, 255)
     );
 
+    //infos Granny
+    private static readonly List<Product> listProducts = Game.Current.GetProducts();
+    readonly Product granny = listProducts.Find(p => p.Name == "GrannyJuju");
 
     private void Draw()
     {
@@ -65,7 +68,6 @@ public partial class Clicker : Form
         RectangleF drawRecte = new RectangleF(50, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         Font drawFont = new Font("Arial", 16);
-
 
         g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, drawRect, drawFormat);
 
@@ -84,7 +86,6 @@ public partial class Clicker : Form
         g.DrawImage(bgStore, productReact);
 
         g.DrawImage(grannyPicture, grannyRect);
-
 
 
         if (avocadoRect.Contains(cursor) && isDown)
@@ -107,14 +108,13 @@ public partial class Clicker : Form
             avocadoRect = avocadoStandar;
 
 
-
         if (grannyRect.Contains(cursor) && isDown)
             inProductDown = true;
 
         if (grannyRect.Contains(cursor) && !isDown && inProductDown)
         {
             inProductDown = false;
-            Game.Current.BuyProduct(grannyJuju);
+            Game.Current.BuyProduct(granny);
             //Game.Current.UpdatePrice(grannyJuju);
         }
     }

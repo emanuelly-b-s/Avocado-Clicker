@@ -28,7 +28,7 @@ public class Game
             if(instance == null)
             {
                 instance = new Game();
-                GrannyJuju grannyJuju = new GrannyJuju("vovo");
+                GrannyJuju grannyJuju = new GrannyJuju("GrannyJuju");
                 instance.Products.Add(grannyJuju);
             }
             return instance;

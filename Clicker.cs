@@ -113,9 +113,9 @@ public partial class Clicker : Form
 
         if (grannyRect.Contains(cursor) && !isDown && inProductDown)
         {
-            //inProductDown = false;
-            //Game.Current.BuyProduct(grannyJuju);
-            Game.Current.UpdatePrice(grannyJuju);
+            inProductDown = false;
+            Game.Current.BuyProduct(grannyJuju);
+            //Game.Current.UpdatePrice(grannyJuju);
         }
     }
 

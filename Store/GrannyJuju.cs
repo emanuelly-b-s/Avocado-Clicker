@@ -1,3 +1,4 @@
+using Avocado_Cliker.Fruit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ internal class GrannyJuju : Product
 {
 
     public GrannyJuju(string name) : base(name)
-        => Price = 6f;
+    {
+        this.Price = 6f;
+        this.Quantity = 5;
+    }
+
+    public float UpdatePrice()
+        => this.Price += this.Quantity * .05f;
 
 }

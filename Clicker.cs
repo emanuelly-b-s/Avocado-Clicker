@@ -39,6 +39,8 @@ public partial class Clicker : Form
     RectangleF avocadoUp = RectangleF.Empty;
     RectangleF grannyRect = RectangleF.Empty;
     RectangleF productReact = RectangleF.Empty;
+    RectangleF grannyBuy = RectangleF.Empty;
+
 
     Point cursor = Point.Empty;
 
@@ -55,38 +57,52 @@ public partial class Clicker : Form
 
     //infos Granny
     private static readonly List<Product> listProducts = Game.Current.GetProducts();
-    readonly Product granny = listProducts.Find(p => p.Name == "GrannyJuju");
+    private readonly Product granny = listProducts.Find(p => p.Name == "GrannyJuju");
+    private float priceGranny;
+
 
     private void Draw()
     {
+        float heightRectStore = .20f * pb.Height;
 
-        Pen pen = new Pen(linGrBrush);
-        //g.DrawRectangle(pen, 100, 100, Width, Height);
-        StringFormat drawFormat = new StringFormat();
-        drawFormat.Alignment = StringAlignment.Center;
-        RectangleF drawRect = new RectangleF(100, 50, Width, Height);
+        //format strings 
+        StringFormat stringFormat = new StringFormat();
+        stringFormat.Alignment = StringAlignment.Near;
+        stringFormat.LineAlignment = StringAlignment.Center;
+        RectangleF drawRect = new RectangleF(100, 50, productReact.Width / 2, Height);
         RectangleF drawRecte = new RectangleF(50, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
-        Font drawFont = new Font("Arial", 16);
+        Font drawFont = new Font("Arial Narrow Regular", 16, (FontStyle)5);
 
-        g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, drawRect, drawFormat);
+
+        RectangleF drawInfosGranny = new RectangleF(100, 50, productReact.Width / 2, heightRectStore / 2);
+
+
+        g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, drawRect, stringFormat);
+
+        g.DrawString("Qtd Generate: " + Game.Current.GetGeneratPerClickProduct(granny), drawFont, drawBrush, productReact, stringFormat);
 
         // Draw string to screen.
         var listProducts = Game.Current.GetProducts();
 
         foreach (var item in listProducts)
         {
-            g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, drawFormat);
+            g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, stringFormat);
             pb.Refresh();
         }
-
+        pb.Refresh();
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocadoPicture, avocadoRect);
         g.DrawImage(bgStore, productReact);
 
-        g.DrawImage(grannyPicture, grannyRect);
+        if (granny is not null)
+        {
+            priceGranny = granny.Price;
+            g.DrawImage(grannyPicture, grannyRect);
+            //g.DrawString("Price: " + priceGranny.ToString(), drawFont, drawBrush, productReact, stringFormat);
 
+        }
 
         if (avocadoRect.Contains(cursor) && isDown)
         {
@@ -114,22 +130,30 @@ public partial class Clicker : Form
         if (grannyRect.Contains(cursor) && !isDown && inProductDown)
         {
             inProductDown = false;
-            Game.Current.BuyProduct(granny);
-            //Game.Current.UpdatePrice(grannyJuju);
+            //Game.Current.BuyProduct(granny);
+            //Game.Current.UpdatePrice(granny);
+            Game.Current.BuyProduct(granny, 1);
         }
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
     {
 
+        float heightRectStore = .20f * pb.Height;
+
         this.WindowState = FormWindowState.Maximized;
         this.FormBorderStyle = FormBorderStyle.None;
 
-        float heightRectStore = .20f * pb.Height;
         bmp = new Bitmap(pb.Width, pb.Height);
 
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
+
+        //rect products
+        productReact = new RectangleF(
+            .85f * pb.Width, heightRectStore,
+            .15f * pb.Width, .15f * pb.Height
+        );
 
         //avocado states
         avocadoStandar = new RectangleF(
@@ -149,16 +173,18 @@ public partial class Clicker : Form
 
         avocadoRect = avocadoStandar;
 
-        //granny states
+        //granny
         grannyRect = new RectangleF(
             .92f * pb.Width, heightRectStore,
             .08f * pb.Width, .08f * pb.Width
         );
 
-        productReact = new RectangleF(
-            .85f * pb.Width, heightRectStore,
-            .15f * pb.Width, .15f * pb.Height
+        grannyBuy = new RectangleF(
+            .5f * pb.Width, heightRectStore / 2,
+            .08f * pb.Width, .08f * pb.Width
         );
+
+
 
         //key to exit
         KeyPreview = true;

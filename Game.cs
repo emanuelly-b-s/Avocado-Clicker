@@ -11,11 +11,11 @@ namespace Avocado_Cliker;
 
 public class Game
 {
-    Avocado Avocado = new Avocado();
-
-    public float AvocadoPerClick { get; private set; } = 1;
+    public readonly Avocado Avocado = new Avocado();
 
     private List<Product> Products { get; set; } = new List<Product>();
+
+    private readonly Product _Product;
 
     private Game() { }
 
@@ -28,7 +28,7 @@ public class Game
             if(instance == null)
             {
                 instance = new Game();
-                GrannyJuju grannyJuju = new GrannyJuju("GrannyJuju");
+                Product grannyJuju = new GrannyJuju("GrannyJuju");
                 instance.Products.Add(grannyJuju);
             }
             return instance;
@@ -37,15 +37,17 @@ public class Game
 
 
     public void Click()
-        => Avocado.ClickesAvocados(AvocadoPerClick);
+        => Avocado.ClickesAvocados();
 
-    public void BuyProduct(Product p)
+    public void BuyProduct(Product p, int value)
     {
         if (Avocado.GetAvocados() >= p.Price)
         {
             p.AddProduct();
             Avocado.BuyAnyProd(p.Price);
         }
+
+        UpdateLevel(value, p);
     }
 
     public int GetQuantity(Product p)
@@ -57,6 +59,19 @@ public class Game
     public float CountAvocados()
         => Avocado.GetAvocados();
 
+    public float GetGeneratPerClick()
+        => Avocado.GetGeneratedPerClick();
+
+    public float GetGeneratPerClickProduct(Product p)
+        => p.GetQuantityPerClick();
+
     public void UpdatePrice(Product p)
         => p.UpdatePrice();
+
+    public float GetPrice(Product p)
+        => p.GetPrice();
+
+    public float UpdateLevel(int value, Product p)
+        => p.UpdateLevel(value);
+
 }

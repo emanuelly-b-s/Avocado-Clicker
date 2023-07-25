@@ -39,7 +39,6 @@ public partial class Clicker : Form
     RectangleF avocadoUp = RectangleF.Empty;
     RectangleF grannyRect = RectangleF.Empty;
     RectangleF productReact = RectangleF.Empty;
-    RectangleF grannyBuy = RectangleF.Empty;
 
 
     Point cursor = Point.Empty;
@@ -85,12 +84,11 @@ public partial class Clicker : Form
 
         RectangleF drawRecte = new RectangleF(50, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
-        Font drawFont = new Font("Arial Narrow Regular", 16, FontStyle.Bold | FontStyle.Underline);
+        Font drawFont = new Font("Arial Narrow Regular", 14, FontStyle.Bold);
 
 
-        RectangleF drawInfosGranny = new RectangleF(productReact.X + 50, productReact.Y + 10, productReact.Width / 3, heightRectStore / 2);
+        RectangleF drawInfosGranny = new RectangleF(productReact.X + 3, productReact.Y + 10, productReact.Width / 2, heightRectStore / 2);
         
-        // Draw string to screen.
         var listProducts = Game.Current.GetProducts();
 
         //foreach (var item in listProducts)
@@ -104,8 +102,9 @@ public partial class Clicker : Form
         g.DrawImage(bgStore, productReact);
 
         //g.DrawString(": " + granny.QuantiyPerClick, drawFont, drawBrush, productReact, stringFormat);
-        g.DrawString("" + Game.Current.Avocado.AvocadoProduction, drawFont, drawBrush, drawInfosGranny, stringFormat);
-        g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
+        g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
+        g.DrawString("\n\nGenerate +: " + Game.Current.GetGenerateClickes(granny), drawFont, drawBrush, drawInfosGranny, stringFormat);
+        g.DrawString(Game.Current.CountAvocados().ToString("#.00").ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
 
 
         if (granny is not null)
@@ -192,10 +191,7 @@ public partial class Clicker : Form
             .08f * pb.Width, .08f * pb.Width
         );
 
-        grannyBuy = new RectangleF(
-            .5f * pb.Width, heightRectStore / 2,
-            .08f * pb.Width, .08f * pb.Width
-        );
+        
 
 
 

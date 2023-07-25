@@ -13,7 +13,8 @@ public abstract class Product
     public int Level;
     public float Price { get; set; }
     public float QuantityProduct { get; set; }
-    public float QuantiyPerClick { get; set; } = 0;
+    public float QuantiyGenerating { get; set; } = 0;
+    public float QuantiyGenerate { get; set; } = 0;
     public string Name { get; set; }
 
     public Product(string name)
@@ -43,11 +44,11 @@ public abstract class Product
                          + this.Level;
 
 
-        this.QuantiyPerClick += (this.Level / 0.5f)
+        this.QuantiyGenerating += (this.Level / 0.5f)
                                 * 0.02f 
                                 + (this.QuantityProduct / .10f)
                                 * 0.0005f;
 
-        return this.QuantiyPerClick;
+        return this.QuantiyGenerating;
     }
 }

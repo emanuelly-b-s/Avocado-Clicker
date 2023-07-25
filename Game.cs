@@ -45,19 +45,13 @@ public class Game
     {
         if (Avocado.Avocados >= p.Price)
         {
-            //p.AddProduct();
-            //Avocado.BuyAnyProd(p.Price);
-            //p.UpdateLevel(value);
-
-            //Avocado.AddProduction(p.QuantiyPerClick);
-
             switch (p)
             {
                 case GrannyJuju granny:
                     granny.AddProduct();
                     Avocado.BuyAnyProd(granny.Price);
                     granny.UpdateLevel(value);
-                    Avocado.AddProduction(granny.QuantiyPerClick);
+                    Avocado.AddProduction(granny.QuantiyGenerating);
                     break;
             } 
         }
@@ -72,7 +66,7 @@ public class Game
     public float CountAvocados()
         => Avocado.Avocados;
 
-    public float GetGeneratPerClick()
+    public float GetGeneratePerClick()
         => Avocado.Avocados;
 
     public float GetPrice(Product p)
@@ -80,5 +74,8 @@ public class Game
 
     public float UpdateLevel(int value, Product p)
         => p.UpdateLevel(value);
+
+    public float GetGenerateClickes(Product p)
+        => p.QuantiyGenerate;
 
 }

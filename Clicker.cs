@@ -88,7 +88,7 @@ public partial class Clicker : Form
         Font drawFont = new Font("Arial Narrow Regular", 16, FontStyle.Bold | FontStyle.Underline);
 
 
-        RectangleF drawInfosGranny = new RectangleF(100, 50, productReact.Width / 2, heightRectStore / 2);
+        RectangleF drawInfosGranny = new RectangleF(productReact.X + 50, productReact.Y + 10, productReact.Width / 3, heightRectStore / 2);
         
         // Draw string to screen.
         var listProducts = Game.Current.GetProducts();
@@ -104,7 +104,7 @@ public partial class Clicker : Form
         g.DrawImage(bgStore, productReact);
 
         //g.DrawString(": " + granny.QuantiyPerClick, drawFont, drawBrush, productReact, stringFormat);
-        g.DrawString("" + Game.Current.Avocado.AvocadoProduction, drawFont, drawBrush, aaa, stringFormat);
+        g.DrawString("" + Game.Current.Avocado.AvocadoProduction, drawFont, drawBrush, drawInfosGranny, stringFormat);
         g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
 
 

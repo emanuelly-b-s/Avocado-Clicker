@@ -31,7 +31,6 @@ public class Avocado
         => this.AvocadosPerClick += value;
     
 
-
     private DateTime last = DateTime.Now;
     public void Product()
     {

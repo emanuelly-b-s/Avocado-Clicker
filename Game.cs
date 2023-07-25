@@ -20,12 +20,12 @@ public class Game
     private Game() { }
 
     private static Game instance;
-    
+
     public static Game Current
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new Game();
                 Product grannyJuju = new GrannyJuju("GrannyJuju");
@@ -34,7 +34,7 @@ public class Game
             return instance;
         }
     }
-    
+
     public void Click()
         => Avocado.ClickesAvocados();
 
@@ -45,18 +45,28 @@ public class Game
     {
         if (Avocado.Avocados >= p.Price)
         {
-            p.AddProduct();
-            Avocado.BuyAnyProd(p.Price);
-            p.UpdateLevel(value);
+            //p.AddProduct();
+            //Avocado.BuyAnyProd(p.Price);
+            //p.UpdateLevel(value);
 
-            Avocado.AddProduction(p.QuantiyPerClick);
+            //Avocado.AddProduction(p.QuantiyPerClick);
+
+            switch (p)
+            {
+                case GrannyJuju granny:
+                    granny.AddProduct();
+                    Avocado.BuyAnyProd(granny.Price);
+                    granny.UpdateLevel(value);
+                    Avocado.AddProduction(granny.QuantiyPerClick);
+                    break;
+            } 
         }
     }
 
     public float GetQuantity(Product p)
-        => p.Quantity;
+        => p.QuantityProduct;
 
-    public List<Product> GetProducts() 
+    public List<Product> GetProducts()
         => this.Products;
 
     public float CountAvocados()
@@ -65,11 +75,8 @@ public class Game
     public float GetGeneratPerClick()
         => Avocado.Avocados;
 
-    public void UpdatePrice(Product p)
-        => p.UpdatePrice();
-
     public float GetPrice(Product p)
-        => p.GetPrice();
+        => p.Price;
 
     public float UpdateLevel(int value, Product p)
         => p.UpdateLevel(value);

@@ -13,7 +13,7 @@ public class Game
 {
     public readonly Avocado Avocado = new Avocado();
 
-    private List<Product> Products { get; set; } = new List<Product>();
+    public List<Product> Products { get; private set; } = new List<Product>();
 
     private readonly Product _Product;
 

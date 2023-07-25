@@ -20,17 +20,18 @@ public partial class Clicker : Form
         grannyPicture = Bitmap.FromFile("../../../Images/Product/Gann.png") as Bitmap;
         avocadoPicture = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
         bgStore = Bitmap.FromFile("../../../Images/Background/bgStore.png") as Bitmap;
+        bGgarden = Bitmap.FromFile("../../../Images/Background/jardimVovo.png") as Bitmap;
 
     }
 
+    Bitmap bgGarden = null;
     Graphics g = null;
     bool running = true;
-
     Bitmap bg = null;
     Bitmap bmp = null;
     Bitmap avocadoPicture = null;
     Bitmap grannyPicture = null;
-
+    //Bitmap grannyPicture = null;
     Bitmap bgStore = null;
 
     RectangleF avocadoRect = Rectangle.Empty;
@@ -64,14 +65,16 @@ public partial class Clicker : Form
     {
         float heightRectStore = .20f * pb.Height;
 
+        var listProducts = Game.Current.GetProducts();
+
         //format strings 
         StringFormat stringFormat = new StringFormat();
         stringFormat.Alignment = StringAlignment.Center;
         stringFormat.LineAlignment = StringAlignment.Center;
         RectangleF totalAvocadoRect = new RectangleF(
-            avocadoRect.X, 
-            avocadoRect.Y + avocadoRect.Height, 
-            avocadoRect.Width, 
+            avocadoRect.X,
+            avocadoRect.Y + avocadoRect.Height,
+            avocadoRect.Width,
             30
         );
 
@@ -88,12 +91,11 @@ public partial class Clicker : Form
 
 
         RectangleF drawInfosGranny = new RectangleF(productReact.X + 3, productReact.Y + 10, productReact.Width / 2, heightRectStore / 2);
-        
-        var listProducts = Game.Current.GetProducts();
+
 
         //foreach (var item in listProducts)
         //{
-            //g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, stringFormat);
+        //g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, stringFormat);
         //    pb.Refresh();
         //}
 
@@ -114,6 +116,20 @@ public partial class Clicker : Form
             //g.DrawString("Price: " + priceGranny.ToString(), drawFont, drawBrush, productReact, stringFormat)
         }
 
+
+        foreach (var item in listProducts)
+        {
+            if (item.QuantityProduct != 0)
+            {
+                switch (item)
+                {
+                    //case GrannyJuju granny:
+
+                }
+
+
+            }
+        }
 
         if (avocadoRect.Contains(cursor) && isDown)
         {
@@ -191,10 +207,6 @@ public partial class Clicker : Form
             .08f * pb.Width, .08f * pb.Width
         );
 
-        
-
-
-
         //key to exit
         KeyPreview = true;
 
@@ -227,4 +239,5 @@ public partial class Clicker : Form
     private void pb_MouseUp(object sender, MouseEventArgs e)
         => isDown = false;
 
+ 
 }

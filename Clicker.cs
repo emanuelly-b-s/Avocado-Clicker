@@ -16,6 +16,7 @@ public partial class Clicker : Form
         avocadoPicture = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
         bgStore = Bitmap.FromFile("../../../Images/Background/bgStore.png") as Bitmap;
         bgGarden = Bitmap.FromFile("../../../Images/Background/gardem.png") as Bitmap;
+        grannyProduction = Bitmap.FromFile("../../../Images/Product/granny.png") as Bitmap;
 
     }
 
@@ -27,6 +28,7 @@ public partial class Clicker : Form
     Bitmap avocadoPicture = null;
     Bitmap grannyPicture = null;
     Bitmap bgStore = null;
+    Bitmap grannyProduction = null;
 
     RectangleF avocadoRect = Rectangle.Empty;
     RectangleF avocadoStandar = RectangleF.Empty;
@@ -35,6 +37,7 @@ public partial class Clicker : Form
     RectangleF grannyRect = RectangleF.Empty;
     RectangleF productReact = RectangleF.Empty;
     RectangleF productionReact = RectangleF.Empty;
+    RectangleF grannyProductionReact = RectangleF.Empty;
 
 
     Point cursor = Point.Empty;
@@ -117,6 +120,7 @@ public partial class Clicker : Form
                 {
                     case GrannyJuju granny:
                         g.DrawImage(bgGarden, productionReact);
+                        g.DrawImage(grannyProduction, grannyProductionReact);
                         break;
                 }
 
@@ -198,13 +202,20 @@ public partial class Clicker : Form
         //granny
         grannyRect = new RectangleF(
             .92f * pb.Width, heightRectStore,
-            .08f * pb.Width, .08f * pb.Width
+            .08f * pb.Width, .08f * pb.Width  
         );
 
         productionReact = new RectangleF(
            .25f * pb.Width, pb.Height * .10f,
            .50f * pb.Width, .20f * pb.Height
         );
+
+        grannyProductionReact = new RectangleF(
+            productionReact.Width,  
+            productionReact.Height,
+            productionReact.Width / 20,
+            productionReact.Height / 3
+      );
 
         //key to exit
         KeyPreview = true;

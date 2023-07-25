@@ -1,12 +1,7 @@
-using System;
+using Avocado_Cliker.Marketplace;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Windows.Forms;
-using Avocado_Cliker.Fruit;
-using Avocado_Cliker.Marketplace;
-using static Avocado_Cliker.Marketplace.Product;
 
 namespace Avocado_Cliker;
 
@@ -95,7 +90,7 @@ public partial class Clicker : Form
         //}
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
-        g.DrawImage(bgGarden, productionReact);
+
         g.DrawImage(avocadoPicture, avocadoRect);
         g.DrawImage(bgStore, productReact);
 
@@ -207,8 +202,8 @@ public partial class Clicker : Form
         );
 
         productionReact = new RectangleF(
-           .30f * pb.Width, pb.Height * .20f,
-           .15f * pb.Width, .15f * pb.Height
+           .25f * pb.Width, pb.Height * .10f,
+           .50f * pb.Width, .20f * pb.Height
         );
 
         //key to exit

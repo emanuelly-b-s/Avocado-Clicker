@@ -48,12 +48,12 @@ public partial class Clicker : Form
     bool inAvocadoDown = false;
     bool inProductDown = false;
 
-    LinearGradientBrush linGrBrush = new LinearGradientBrush(
-       new Point(0, 10),
-       new Point(200, 10),
-       Color.FromArgb(255, 255, 0, 0),
-       Color.FromArgb(255, 0, 0, 255)
-    );
+    //LinearGradientBrush linGrBrush = new LinearGradientBrush(
+    //   new Point(0, 10),
+    //   new Point(200, 10),
+    //   Color.FromArgb(255, 255, 0, 0),
+    //   Color.FromArgb(255, 0, 0, 255)
+    //);
 
     //infos Granny
     private static readonly List<Product> listProducts = Game.Current.GetProducts();
@@ -67,21 +67,29 @@ public partial class Clicker : Form
 
         //format strings 
         StringFormat stringFormat = new StringFormat();
-        stringFormat.Alignment = StringAlignment.Near;
+        stringFormat.Alignment = StringAlignment.Center;
         stringFormat.LineAlignment = StringAlignment.Center;
-        RectangleF drawRect = new RectangleF(100, 50, productReact.Width / 2, Height);
+        RectangleF totalAvocadoRect = new RectangleF(
+            avocadoRect.X, 
+            avocadoRect.Y + avocadoRect.Height, 
+            avocadoRect.Width, 
+            30
+        );
+
+        RectangleF aaa = new RectangleF(
+            avocadoRect.X + 10,
+            avocadoRect.Y + avocadoRect.Height + 15,
+            avocadoRect.Width,
+            30
+        );
+
         RectangleF drawRecte = new RectangleF(50, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
-        Font drawFont = new Font("Arial Narrow Regular", 16, (FontStyle)5);
+        Font drawFont = new Font("Arial Narrow Regular", 16, FontStyle.Bold | FontStyle.Underline);
 
 
         RectangleF drawInfosGranny = new RectangleF(100, 50, productReact.Width / 2, heightRectStore / 2);
-
-
-        g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, drawRect, stringFormat);
-
-
-
+        
         // Draw string to screen.
         var listProducts = Game.Current.GetProducts();
 
@@ -90,23 +98,22 @@ public partial class Clicker : Form
             //g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, stringFormat);
         //    pb.Refresh();
         //}
-        pb.Refresh();
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocadoPicture, avocadoRect);
         g.DrawImage(bgStore, productReact);
 
-        g.DrawString("\n: " + Game.Current.Avocado.GetGeneratedPerClick(), drawFont, drawBrush, productReact, stringFormat);
+        //g.DrawString(": " + granny.QuantiyPerClick, drawFont, drawBrush, productReact, stringFormat);
+        g.DrawString("" + Game.Current.Avocado.AvocadoProduction, drawFont, drawBrush, aaa, stringFormat);
+        g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
 
 
-        g.DrawString(": " + Game.Current.GetGeneratPerClickProduct(granny), drawFont, drawBrush, productReact, stringFormat);
         if (granny is not null)
         {
             priceGranny = granny.Price;
             g.DrawImage(grannyPicture, grannyRect);
             //g.DrawString("Price: " + priceGranny.ToString(), drawFont, drawBrush, productReact, stringFormat)
         }
-        pb.Refresh();
 
 
         if (avocadoRect.Contains(cursor) && isDown)
@@ -139,6 +146,7 @@ public partial class Clicker : Form
             //Game.Current.UpdatePrice(granny);
             Game.Current.BuyProduct(granny, 1);
         }
+        pb.Refresh();
     }
 
     private void Clicker_Load(object sender, System.EventArgs e)
@@ -208,6 +216,7 @@ public partial class Clicker : Form
         while (running)
         {
             Draw();
+            Game.Current.Product();
             pb.Refresh();
             Application.DoEvents();
         }

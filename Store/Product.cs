@@ -12,8 +12,8 @@ public abstract class Product
 
     public int Level;
     public float Price { get; set; }
-    public int Quantity { get; set; }
-    public float QuantiyPerClick { get; set; } = 0;
+    public float Quantity { get; set; }
+    public float QuantiyPerClick { get; private set; } = 0;
     public string Name { get; set; }
 
     public Product(string name)
@@ -22,7 +22,7 @@ public abstract class Product
 
     public float UpdatePrice()
         => this.Price += this.Quantity
-                         * .2f
+                         * .02f
                          + this.Price
                          * .3f
                          + this.Level;
@@ -37,16 +37,19 @@ public abstract class Product
     {
         this.Level += value;
         this.Price += this.Quantity
-                        * .2f
-                        + this.Price
-                        * .3f
-                        + this.Level;
+                         * .02f
+                         + this.Price
+                         * .3f
+                         + this.Level;
 
-        this.QuantiyPerClick += this.Level * 2f + this.Quantity * 0.05f;
+
+        this.QuantiyPerClick += (this.Level / 0.5f)
+                                * 0.02f 
+                                + (this.Quantity / .10f)
+                                * 0.0005f;
+
+
 
         return this.QuantiyPerClick;
     }
-
-    public float GetQuantityPerClick()
-        => this.QuantiyPerClick;
 }

@@ -34,37 +34,36 @@ public class Game
             return instance;
         }
     }
-
-
+    
     public void Click()
         => Avocado.ClickesAvocados();
 
+    public void Product()
+        => this.Avocado.Product();
+
     public void BuyProduct(Product p, int value)
     {
-        if (Avocado.GetAvocados() >= p.Price)
+        if (Avocado.Avocados >= p.Price)
         {
             p.AddProduct();
             Avocado.BuyAnyProd(p.Price);
             p.UpdateLevel(value);
-            var QuantiyPerClick = p.GetQuantityPerClick();
-            Avocado.UpdateGenerating(QuantiyPerClick);
+
+            Avocado.AddProduction(p.QuantiyPerClick);
         }
     }
 
-    public int GetQuantity(Product p)
+    public float GetQuantity(Product p)
         => p.Quantity;
 
     public List<Product> GetProducts() 
         => this.Products;
 
     public float CountAvocados()
-        => Avocado.GetAvocados();
+        => Avocado.Avocados;
 
     public float GetGeneratPerClick()
-        => Avocado.GetGeneratedPerClick();
-
-    public float GetGeneratPerClickProduct(Product p)
-        => p.GetQuantityPerClick();
+        => Avocado.Avocados;
 
     public void UpdatePrice(Product p)
         => p.UpdatePrice();

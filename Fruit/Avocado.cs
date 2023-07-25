@@ -9,8 +9,13 @@ namespace Avocado_Cliker.Fruit;
 public class Avocado
 {
     public string Name { get; } = "Avocado";
-    private float Avocados { get; set; } = 1;
-    private float AvocadosPerClick { get; set; } = 1;
+    public float Avocados { get; private set; } = 1;
+    public float AvocadosPerClick { get; private set; } = 1;
+    public float AvocadoProduction { get; private set; } = 0;
+
+    public void AddProduction(float product)
+        => this.AvocadoProduction += product;
+
 
     public void ClickesAvocados()
         => this.Avocados += AvocadosPerClick;
@@ -18,13 +23,23 @@ public class Avocado
     public float GetAvocados()
         => this.Avocados;
 
-    public float BuyAnyProd(float value)
-        => this.Avocados -= value;
+    public void BuyAnyProd(float value)
+       => this.Avocados -= value;
+
 
     public void UpdateGenerating(float value)
         => this.AvocadosPerClick += value;
+    
 
-    public float GetGeneratedPerClick()
-        => this.AvocadosPerClick;
+
+    private DateTime last = DateTime.Now;
+    public void Product()
+    {
+        var now = DateTime.Now;
+        var time = now - last;
+        var prod = time.TotalSeconds * AvocadoProduction;
+        this.Avocados += (float)prod;
+        last = now;
+    }
 }
 

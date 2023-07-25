@@ -45,9 +45,10 @@ public class Game
         {
             p.AddProduct();
             Avocado.BuyAnyProd(p.Price);
+            p.UpdateLevel(value);
+            var QuantiyPerClick = p.GetQuantityPerClick();
+            Avocado.UpdateGenerating(QuantiyPerClick);
         }
-
-        UpdateLevel(value, p);
     }
 
     public int GetQuantity(Product p)

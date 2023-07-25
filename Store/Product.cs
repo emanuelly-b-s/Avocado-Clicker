@@ -9,7 +9,6 @@ namespace Avocado_Cliker.Marketplace;
 
 public abstract class Product
 {
-    protected Avocado avocado = new Avocado();
 
     public int Level;
     public float Price { get; set; }
@@ -44,8 +43,6 @@ public abstract class Product
                         + this.Level;
 
         this.QuantiyPerClick += this.Level * 2f + this.Quantity * 0.05f;
-
-        avocado.UpdateGenerated(QuantiyPerClick);
 
         return this.QuantiyPerClick;
     }

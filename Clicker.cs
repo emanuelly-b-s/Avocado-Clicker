@@ -80,29 +80,34 @@ public partial class Clicker : Form
 
         g.DrawString(Game.Current.CountAvocados().ToString(), drawFont, drawBrush, drawRect, stringFormat);
 
-        g.DrawString("Qtd Generate: " + Game.Current.GetGeneratPerClickProduct(granny), drawFont, drawBrush, productReact, stringFormat);
+
 
         // Draw string to screen.
         var listProducts = Game.Current.GetProducts();
 
-        foreach (var item in listProducts)
-        {
-            g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, stringFormat);
-            pb.Refresh();
-        }
+        //foreach (var item in listProducts)
+        //{
+            //g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, stringFormat);
+        //    pb.Refresh();
+        //}
         pb.Refresh();
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
         g.DrawImage(avocadoPicture, avocadoRect);
         g.DrawImage(bgStore, productReact);
 
+        g.DrawString("\n: " + Game.Current.Avocado.GetGeneratedPerClick(), drawFont, drawBrush, productReact, stringFormat);
+
+
+        g.DrawString(": " + Game.Current.GetGeneratPerClickProduct(granny), drawFont, drawBrush, productReact, stringFormat);
         if (granny is not null)
         {
             priceGranny = granny.Price;
             g.DrawImage(grannyPicture, grannyRect);
-            //g.DrawString("Price: " + priceGranny.ToString(), drawFont, drawBrush, productReact, stringFormat);
-
+            //g.DrawString("Price: " + priceGranny.ToString(), drawFont, drawBrush, productReact, stringFormat)
         }
+        pb.Refresh();
+
 
         if (avocadoRect.Contains(cursor) && isDown)
         {

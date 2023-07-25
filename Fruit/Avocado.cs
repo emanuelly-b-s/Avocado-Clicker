@@ -21,7 +21,7 @@ public class Avocado
     public float BuyAnyProd(float value)
         => this.Avocados -= value;
 
-    public void UpdateGenerated(float value)
+    public void UpdateGenerating(float value)
         => this.AvocadosPerClick += value;
 
     public float GetGeneratedPerClick()

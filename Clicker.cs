@@ -39,25 +39,15 @@ public partial class Clicker : Form
     RectangleF productionReact = RectangleF.Empty;
     RectangleF grannyProductionReact = RectangleF.Empty;
 
-
     Point cursor = Point.Empty;
 
     bool isDown = false;
     bool inAvocadoDown = false;
     bool inProductDown = false;
 
-    //LinearGradientBrush linGrBrush = new LinearGradientBrush(
-    //   new Point(0, 10),
-    //   new Point(200, 10),
-    //   Color.FromArgb(255, 255, 0, 0),
-    //   Color.FromArgb(255, 0, 0, 255)
-    //);
-
     //infos Granny
     private static readonly List<Product> listProducts = Game.Current.GetProducts();
     private readonly Product granny = listProducts.Find(p => p.Name == "GrannyJuju");
-    private float priceGranny;
-
 
     private void Draw()
     {
@@ -77,42 +67,26 @@ public partial class Clicker : Form
             30
         );
 
-
         RectangleF drawRecte = new RectangleF(50, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         Font drawFont = new Font("Arial Narrow Regular", 14, FontStyle.Bold);
 
-
         RectangleF drawInfosGranny = new RectangleF(productReact.X + 3, productReact.Y + 10, productReact.Width / 2, heightRectStore / 2);
-
-
-        //foreach (var item in listProducts)
-        //{
-        //g.DrawString(item.Name + item.Price.ToString(), drawFont, drawBrush, drawRecte, stringFormat);
-        //    pb.Refresh();
-        //}
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
 
         g.DrawImage(avocadoPicture, avocadoRect);
         g.DrawImage(bgStore, productReact);
-
-
-        //g.DrawString(": " + granny.QuantiyPerClick, drawFont, drawBrush, productReact, stringFormat);
-        g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
-        g.DrawString("\n\nQTD: " + granny.QuantityProduct.ToString(), drawFont, drawBrush, drawInfosGranny, stringFormat);
-
-        g.DrawString("\n\n\n\nGenerate +: " + Game.Current.GetGenerateClickes(granny), drawFont, drawBrush, drawInfosGranny, stringFormat);
+      
         g.DrawString(Game.Current.CountAvocados().ToString("#.00").ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
-
 
         if (granny is not null)
         {
-            priceGranny = granny.Price;
             g.DrawImage(grannyPicture, grannyRect);
-            //g.DrawString("Price: " + priceGranny.ToString(), drawFont, drawBrush, productReact, stringFormat)
+            g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
+            g.DrawString("\n\nQTD: " + granny.QuantityProduct.ToString(), drawFont, drawBrush, drawInfosGranny, stringFormat);
+            g.DrawString("\n\n\n\nGenerate +: " + Game.Current.GetGenerateClickes(granny), drawFont, drawBrush, drawInfosGranny, stringFormat);
         }
-
 
         foreach (var item in listProducts)
         {
@@ -121,25 +95,31 @@ public partial class Clicker : Form
                 switch (item)
                 {
                     case GrannyJuju granny:
+
+                        var grannyProductionWidth = productionReact.Width / 15;
+                        var grannyProductionHeight = productionReact.Height / 2;
+
                         g.DrawImage(bgGarden, productionReact);
-                        var quantityProduct = item.QuantityProduct;
-                        var controlWidth = productionReact.Width;
-                        var controlHeight = productionReact.Height;
-                        while (quantityProduct != 0)
+
+                        for (int i = 0; i < (int)granny.QuantityProduct; i++)
                         {
-                            g.DrawImage(grannyProduction, grannyProductionReact);
-                            grannyProductionReact = new RectangleF(
-                                controlWidth+=50,
-                                controlHeight,
-                                productionReact.Width / 15,
-                                productionReact.Height / 2
+                            var x = productionReact.X + 50 * i;
+                            if (50 * (i - 1) > productionReact.Width)
+                                break;
+
+                            var y = productionReact.Y + productionReact.Height - grannyProductionHeight;
+                            var grannyProductionReact = new RectangleF(
+                                x,
+                                y,
+                                grannyProductionWidth,
+                                grannyProductionHeight
                             );
-                            quantityProduct--;
+
+                            g.DrawImage(grannyProduction, grannyProductionReact);
                         }
+
                         break;
                 }
-
-
             }
         }
 
@@ -169,8 +149,6 @@ public partial class Clicker : Form
         if (grannyRect.Contains(cursor) && !isDown && inProductDown)
         {
             inProductDown = false;
-            //Game.Current.BuyProduct(granny);
-            //Game.Current.UpdatePrice(granny);
             Game.Current.BuyProduct(granny, 1);
         }
         pb.Refresh();
@@ -263,6 +241,4 @@ public partial class Clicker : Form
 
     private void pb_MouseUp(object sender, MouseEventArgs e)
         => isDown = false;
-
-
 }

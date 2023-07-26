@@ -12,7 +12,7 @@ internal class GrannyJuju : Product
     public GrannyJuju(string name) : base(name)
     {
         this.Price = 6f;
-        this.QuantityProduct = 0;
+        this.QuantityProduct = 6;
         this.QuantiyGenerate = 0.5f;
     }
 

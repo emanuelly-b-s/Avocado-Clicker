@@ -100,7 +100,9 @@ public partial class Clicker : Form
 
         //g.DrawString(": " + granny.QuantiyPerClick, drawFont, drawBrush, productReact, stringFormat);
         g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
-        g.DrawString("\n\nGenerate +: " + Game.Current.GetGenerateClickes(granny), drawFont, drawBrush, drawInfosGranny, stringFormat);
+        g.DrawString("\n\nQTD: " + granny.QuantityProduct.ToString(), drawFont, drawBrush, drawInfosGranny, stringFormat);
+
+        g.DrawString("\n\n\n\nGenerate +: " + Game.Current.GetGenerateClickes(granny), drawFont, drawBrush, drawInfosGranny, stringFormat);
         g.DrawString(Game.Current.CountAvocados().ToString("#.00").ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
 
 
@@ -120,7 +122,20 @@ public partial class Clicker : Form
                 {
                     case GrannyJuju granny:
                         g.DrawImage(bgGarden, productionReact);
-                        g.DrawImage(grannyProduction, grannyProductionReact);
+                        var quantityProduct = item.QuantityProduct;
+                        var controlWidth = productionReact.Width;
+                        var controlHeight = productionReact.Height;
+                        while (quantityProduct != 0)
+                        {
+                            g.DrawImage(grannyProduction, grannyProductionReact);
+                            grannyProductionReact = new RectangleF(
+                                controlWidth+=50,
+                                controlHeight,
+                                productionReact.Width / 15,
+                                productionReact.Height / 2
+                            );
+                            quantityProduct--;
+                        }
                         break;
                 }
 
@@ -202,7 +217,7 @@ public partial class Clicker : Form
         //granny
         grannyRect = new RectangleF(
             .92f * pb.Width, heightRectStore,
-            .08f * pb.Width, .08f * pb.Width  
+            .08f * pb.Width, .08f * pb.Width
         );
 
         productionReact = new RectangleF(
@@ -211,10 +226,10 @@ public partial class Clicker : Form
         );
 
         grannyProductionReact = new RectangleF(
-            productionReact.Width,  
+            productionReact.Width,
             productionReact.Height,
-            productionReact.Width / 20,
-            productionReact.Height / 3
+            productionReact.Width / 15,
+            productionReact.Height / 2
       );
 
         //key to exit

@@ -1,0 +1,5 @@
+
+         productReact = new RectangleF(
+            pb.Width - (.25f * pb.Width), pb.Height * .10f,
+            pb.Width - ( pb.Width - (.25f * pb.Width)), .15f * pb.Height
+        );

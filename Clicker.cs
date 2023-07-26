@@ -90,7 +90,7 @@ public partial class Clicker : Form
             g.DrawImage(grannyPicture, grannyRect);
             g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
 
-            g.DrawString("\n\n\n\nGenerate +: " + Game.Current.GetGenerateClickes(granny), drawFont, drawBrush, drawInfosGranny, stringFormat);
+            g.DrawString("\n\n\n\nGenerate +: " + avocadoRect.X, drawFont, drawBrush, drawInfosGranny, stringFormat);
         }
 
         foreach (var item in listProducts)
@@ -213,8 +213,10 @@ public partial class Clicker : Form
         //granny
 
         productionReact = new RectangleF(
-           .25f * pb.Width, pb.Height * .10f,
-           .50f * pb.Width, .20f * pb.Height
+           pb.Width /2, 
+           pb.Height * .10f,
+           pb.Width - (avocadoIsDown.Width + productReact.Width), 
+           .20f * pb.Height
         );
 
         grannyProductionReact = new RectangleF(

@@ -55,6 +55,13 @@ public class Game
                     granny.UpdateLevel(value);
                     Avocado.AddProduction(granny.QuantiyGenerating);
                     break;
+
+                case JorelsBrother jorelsBrother:
+                    jorelsBrother.AddProduct();
+                    Avocado.BuyAnyProd(jorelsBrother.Price);
+                    jorelsBrother.UpdateLevel(value);
+                    Avocado.AddProduction(jorelsBrother.QuantiyGenerating);
+                    break;
             } 
         }
     }

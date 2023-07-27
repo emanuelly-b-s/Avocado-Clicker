@@ -56,6 +56,8 @@ public partial class Clicker : Form
 
     private void Draw()
     {
+        var tst = 0;
+
         float heightRectStore = .20f * pb.Height;
 
         var listProducts = Game.Current.GetProducts();
@@ -112,19 +114,38 @@ public partial class Clicker : Form
 
             k++;
 
+
+            if (realProductsRect.Contains(cursor) && isDown)
+                inProductDown = true;
+
             switch (item)
             {
+
                 case GrannyJuju gran:
                  
-                    g.DrawImage(grannyPicture, realProductsRect );
+                    g.DrawImage(grannyPicture, realProductsRect);
                     g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush,
                         realDrawInfoProduct, stringFormat);
+
+                    if (realProductsRect.Contains(cursor) && !isDown && inProductDown)
+                    {
+                        inProductDown = false;
+                        Game.Current.BuyProduct(granny, 1);
+                    }
+
                     break;
 
                 case JorelsBrother irmaoDoJorel:
                     g.DrawImage(irmaoDoJorelPicture, realProductsRect);
                     g.DrawString("Price: " + Game.Current.GetPrice(irmaoDoJorel).ToString("#.00"), drawFont, drawBrush,
                         realDrawInfoProduct, stringFormat);
+
+                    if (realProductsRect.Contains(cursor) && !isDown && inProductDown)
+                    {
+                        inProductDown = false;
+                        Game.Current.BuyProduct(jorelsBrother, 1);
+                    }
+
                     break;
             }
         }
@@ -136,6 +157,15 @@ public partial class Clicker : Form
         {
             if (item.QuantityProduct != 0)
             {
+                var y1 = realStoreRect.Y;
+
+                var realProductionRect = new RectangleF(
+                            productsRect.X, y1 + k * productsRect.Height,
+                            productsRect.Width, productsRect.Width
+                 );
+
+                y1++;
+
                 switch (item)
                 {
                     case GrannyJuju granny:
@@ -152,6 +182,7 @@ public partial class Clicker : Form
                                 break;
 
                             var y = productionReact.Y + productionReact.Height - grannyProductionHeight;
+
                             var grannyProductionReact = new RectangleF(
                                 x,
                                 y,
@@ -161,8 +192,9 @@ public partial class Clicker : Form
 
                             g.DrawImage(grannyProduction, grannyProductionReact);
                         }
-
                         break;
+
+
                 }
             }
         }
@@ -186,15 +218,6 @@ public partial class Clicker : Form
         if (!avocadoRect.Contains(cursor))
             avocadoRect = avocadoStandar;
 
-
-        if (productsRect.Contains(cursor) && isDown)
-            inProductDown = true;
-
-        if (productsRect.Contains(cursor) && !isDown && inProductDown)
-        {
-            inProductDown = false;
-            Game.Current.BuyProduct(granny, 1);
-        }
         pb.Refresh();
     }
 

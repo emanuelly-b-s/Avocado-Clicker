@@ -72,7 +72,7 @@ public partial class Clicker : Form
             30
         );
 
-        RectangleF drawInfosGranny = new RectangleF(
+        RectangleF drawInfoProduct = new RectangleF(
             storeRect.X,
             storeRect.Y + 10,
             storeRect.Width / 3,
@@ -92,8 +92,8 @@ public partial class Clicker : Form
          );
 
         g.DrawImage(bgStore, realStoreRect);
-
         int k = 0;
+
         foreach (var item in listProducts)
         {
             var y = realStoreRect.Y;
@@ -101,7 +101,15 @@ public partial class Clicker : Form
             var realProductsRect = new RectangleF(
                         productsRect.X, y + k * productsRect.Height,
                         productsRect.Width, productsRect.Width
-           );
+            );
+
+            var realDrawInfoProduct = new RectangleF(
+                realStoreRect.X + (realStoreRect.Width * .05f),
+                realStoreRect.Y +  k * productsRect.Height,
+                realStoreRect.Width / 3,
+                heightRectStore / 2
+            );
+
             k++;
 
             switch (item)
@@ -110,13 +118,13 @@ public partial class Clicker : Form
                  
                     g.DrawImage(grannyPicture, realProductsRect );
                     g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush,
-                        drawInfosGranny, stringFormat);
+                        realDrawInfoProduct, stringFormat);
                     break;
 
                 case JorelsBrother irmaoDoJorel:
                     g.DrawImage(irmaoDoJorelPicture, realProductsRect);
                     g.DrawString("Price: " + Game.Current.GetPrice(irmaoDoJorel).ToString("#.00"), drawFont, drawBrush,
-                        drawInfosGranny, stringFormat);
+                        realDrawInfoProduct, stringFormat);
                     break;
             }
         }

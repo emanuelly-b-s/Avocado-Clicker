@@ -35,7 +35,7 @@ public partial class Clicker : Form
     RectangleF avocadoIsDown = RectangleF.Empty;
     RectangleF avocadoUp = RectangleF.Empty;
     RectangleF grannyRect = RectangleF.Empty;
-    RectangleF productReact = RectangleF.Empty;
+    RectangleF productRect = RectangleF.Empty;
     RectangleF productionReact = RectangleF.Empty;
     RectangleF grannyProductionReact = RectangleF.Empty;
 
@@ -68,9 +68,9 @@ public partial class Clicker : Form
         );
 
         RectangleF drawInfosGranny = new RectangleF(
-            productReact.X,
-            productReact.Y + 10,
-            productReact.Width /3,
+            productRect.X,
+            productRect.Y + 10,
+            productRect.Width / 3,
             heightRectStore / 2
           );
 
@@ -79,20 +79,38 @@ public partial class Clicker : Form
 
 
         g.DrawImage(bg, 0, 0, pb.Width, pb.Height);
-
         g.DrawImage(avocadoPicture, avocadoRect);
-        g.DrawImage(bgStore, productReact);
+
+        var realProductRect = new RectangleF(
+            productRect.X, productRect.Y,
+            productRect.Width, 
+            productRect.Height * listProducts.Count
+         );
+        g.DrawImage(bgStore, realProductRect);
+
+        foreach (var item in listProducts)
+        {
+            switch (item)
+            {
+                case GrannyJuju gran:
+
+                    g.DrawImage(grannyPicture, grannyRect);
+                    g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush,
+                        drawInfosGranny, stringFormat);
+                    break;
+            }
+        }
 
         g.DrawString(Game.Current.CountAvocados().ToString("#.00").ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
 
-        if (granny is not null)
-        {
-            g.DrawImage(grannyPicture, grannyRect);
-            g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
-            //g.DrawString("\n\n\nGenerate +: " + pb.Width, drawFont, drawBrush, drawInfosGranny, stringFormat);
-            //g.DrawString("\n\n\n\nGenerate +: " + productReact.Width, drawFont, drawBrush, drawInfosGranny, stringFormat);
-            //g.DrawString("\n\n\nGenerate +: " + productReact.X, drawFont, drawBrush, drawInfosGranny, stringFormat);
-        }
+        //if (granny is not null)
+        //{
+        //    g.DrawImage(grannyPicture, grannyRect);
+        //    g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
+        //    //g.DrawString("\n\n\nGenerate +: " + pb.Width, drawFont, drawBrush, drawInfosGranny, stringFormat);
+        //    //g.DrawString("\n\n\n\nGenerate +: " + productReact.Width, drawFont, drawBrush, drawInfosGranny, stringFormat);
+        //    //g.DrawString("\n\n\nGenerate +: " + productReact.X, drawFont, drawBrush, drawInfosGranny, stringFormat);
+        //}
 
         foreach (var item in listProducts)
         {
@@ -173,24 +191,24 @@ public partial class Clicker : Form
         g = Graphics.FromImage(bmp);
         pb.Image = bmp;
 
-        productReact = new RectangleF(
+        productRect = new RectangleF(
             pb.Width - (.25f * pb.Width), pb.Height * .10f,
             pb.Width - (pb.Width - (.25f * pb.Width)), .15f * pb.Height
         );
 
         RectangleF drawInfosGranny = new RectangleF(
-            productReact.X,
-            productReact.Y + 10,
-            productReact.Width / 10,
+            productRect.X,
+            productRect.Y + 10,
+            productRect.Width / 10,
             heightRectStore / 2
           );
 
         //rect products
         grannyRect = new RectangleF(
-            productReact.X + productReact.Width - productReact.Width / 3,
-            productReact.Y,
-            productReact.Width / 3,
-            productReact.Height
+            productRect.X + productRect.Width - productRect.Width / 3,
+            productRect.Y,
+            productRect.Width / 3,
+            productRect.Height
         );
 
         //avocado states
@@ -212,11 +230,10 @@ public partial class Clicker : Form
         avocadoRect = avocadoStandar;
 
         //granny
-
         productionReact = new RectangleF(
-           (avocadoRect.Width + avocadoRect.X) + ((avocadoRect.Width + avocadoRect.X) * .2f), 
+           (avocadoRect.Width + avocadoRect.X) + ((avocadoRect.Width + avocadoRect.X) * .2f),
            pb.Height * .10f,
-           pb.Width - (avocadoRect.Width + productReact.Width) - (avocadoRect.Width + productReact.Width) * .2f, 
+           pb.Width - (avocadoRect.Width + productRect.Width) - (avocadoRect.Width + productRect.Width) * .2f,
            .20f * pb.Height
         );
 
@@ -234,6 +251,7 @@ public partial class Clicker : Form
         {
             if (e.KeyCode == Keys.Escape)
             {
+                running = false;
                 Application.Exit();
             }
         };

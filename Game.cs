@@ -29,7 +29,9 @@ public class Game
             {
                 instance = new Game();
                 Product grannyJuju = new GrannyJuju("GrannyJuju");
+                Product granny = new GrannyJuju("GrannyJuju");
                 instance.Products.Add(grannyJuju);
+                instance.Products.Add(granny);
             }
             return instance;
         }

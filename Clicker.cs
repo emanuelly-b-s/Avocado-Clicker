@@ -214,9 +214,9 @@ public partial class Clicker : Form
         //granny
 
         productionReact = new RectangleF(
-           pb.Width /2, 
+           (avocadoRect.Width + avocadoRect.X) + ((avocadoRect.Width + avocadoRect.X) * .2f), 
            pb.Height * .10f,
-           pb.Width - (avocadoIsDown.Width + productReact.Width), 
+           pb.Width - (avocadoRect.Width + productReact.Width) - (avocadoRect.Width + productReact.Width) * .2f, 
            .20f * pb.Height
         );
 

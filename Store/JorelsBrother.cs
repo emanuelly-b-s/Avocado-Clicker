@@ -1,4 +1,4 @@
-using Avocado_Cliker.Fruit;
+﻿using Avocado_Cliker.Fruit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Avocado_Cliker.Marketplace;
 
-internal class GrannyJuju : Product
+internal class JorelsBrother : Product
 {
 
-    public GrannyJuju(string name) : base(name)
+    public JorelsBrother(string name) : base(name)
     {
-        this.Price = 6f;
+        this.Price = 10f;
         this.QuantityProduct = 0;
-        this.QuantiyGenerate = 0.5f;
+        this.QuantiyGenerate = 0.8f;
     }
 
     public float UpdatePrice()
-            => this.Price += this.QuantityProduct * .05f;
+            => this.Price += this.QuantityProduct * QuantiyGenerate;
 
 
     public float UpdateLevel(int value)

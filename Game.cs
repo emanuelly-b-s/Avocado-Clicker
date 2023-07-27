@@ -29,9 +29,9 @@ public class Game
             {
                 instance = new Game();
                 Product grannyJuju = new GrannyJuju("GrannyJuju");
-                Product granny = new GrannyJuju("GrannyJuju");
+                Product jorelsBrother = new JorelsBrother("Irmão do Jorel");
                 instance.Products.Add(grannyJuju);
-                instance.Products.Add(granny);
+                instance.Products.Add(jorelsBrother);
             }
             return instance;
         }

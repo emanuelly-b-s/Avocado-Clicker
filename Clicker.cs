@@ -152,19 +152,17 @@ public partial class Clicker : Form
 
         g.DrawString(Game.Current.CountAvocados().ToString("#.00").ToString(), drawFont, drawBrush, totalAvocadoRect, stringFormat);
 
-
+        int c = 0;
         foreach (var item in listProducts)
         {
             if (item.QuantityProduct != 0)
             {
-                var y1 = realStoreRect.Y;
-
+                
                 var realProductionRect = new RectangleF(
-                            productsRect.X, y1 + k * productsRect.Height,
-                            productsRect.Width, productsRect.Width
+                            productionReact.X, productionReact.Y + c * productionReact.Height,
+                            productionReact.Width, productionReact.Height
                  );
-
-                y1++;
+                c++;
 
                 switch (item)
                 {
@@ -173,7 +171,7 @@ public partial class Clicker : Form
                         var grannyProductionWidth = productionReact.Width / 15;
                         var grannyProductionHeight = productionReact.Height / 2;
 
-                        g.DrawImage(bgGarden, productionReact);
+                        g.DrawImage(bgGarden, realProductionRect);
 
                         for (int i = 0; i < (int)granny.QuantityProduct; i++)
                         {
@@ -192,6 +190,10 @@ public partial class Clicker : Form
 
                             g.DrawImage(grannyProduction, grannyProductionReact);
                         }
+                        break;
+
+                    case JorelsBrother irmaoDoJorel:
+                        g.DrawImage(bgStore, realProductionRect);
                         break;
 
 

@@ -67,13 +67,13 @@ public partial class Clicker : Form
             30
         );
 
-        RectangleF drawInfosGranny = new RectangleF(productReact.X,
+        RectangleF drawInfosGranny = new RectangleF(
+            productReact.X,
             productReact.Y + 10,
-            productReact.Width / 10,
+            productReact.Width /3,
             heightRectStore / 2
           );
 
-        RectangleF drawRecte = new RectangleF(50, 50, Width, Height);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         Font drawFont = new Font("Arial Narrow Regular", 14, FontStyle.Bold);
 
@@ -89,8 +89,9 @@ public partial class Clicker : Form
         {
             g.DrawImage(grannyPicture, grannyRect);
             g.DrawString("Price: " + Game.Current.GetPrice(granny).ToString("#.00"), drawFont, drawBrush, drawInfosGranny, stringFormat);
-
-            g.DrawString("\n\n\n\nGenerate +: " + avocadoRect.X, drawFont, drawBrush, drawInfosGranny, stringFormat);
+            //g.DrawString("\n\n\nGenerate +: " + pb.Width, drawFont, drawBrush, drawInfosGranny, stringFormat);
+            //g.DrawString("\n\n\n\nGenerate +: " + productReact.Width, drawFont, drawBrush, drawInfosGranny, stringFormat);
+            //g.DrawString("\n\n\nGenerate +: " + productReact.X, drawFont, drawBrush, drawInfosGranny, stringFormat);
         }
 
         foreach (var item in listProducts)
@@ -174,7 +175,7 @@ public partial class Clicker : Form
 
         productReact = new RectangleF(
             pb.Width - (.25f * pb.Width), pb.Height * .10f,
-            pb.Width - (productReact.X), .15f * pb.Height
+            pb.Width - (pb.Width - (.25f * pb.Width)), .15f * pb.Height
         );
 
         RectangleF drawInfosGranny = new RectangleF(
@@ -186,9 +187,9 @@ public partial class Clicker : Form
 
         //rect products
         grannyRect = new RectangleF(
-            productReact.Width - 50,
+            productReact.X + productReact.Width - productReact.Width / 3,
             productReact.Y,
-            50,
+            productReact.Width / 3,
             productReact.Height
         );
 

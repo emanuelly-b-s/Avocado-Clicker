@@ -16,9 +16,9 @@ public partial class Clicker : Form
         avocadoPicture = Bitmap.FromFile("../../../Images/avocado.png") as Bitmap;
         bgStore = Bitmap.FromFile("../../../Images/Background/bgStore.png") as Bitmap;
         bgGarden = Bitmap.FromFile("../../../Images/Background/gardem.png") as Bitmap;
-        grannyProduction = Bitmap.FromFile("../../../Images/Product/granny.png") as Bitmap;
+        grannyProduction = Bitmap.FromFile("../../../Images/Product/granny2.png") as Bitmap;
         irmaoDoJorelPicture = Bitmap.FromFile("../../../Images/Product/irmaoDoJorel.png") as Bitmap;
-
+        irmaoDoJorelProduction = Bitmap.FromFile("../../../Images/Product/vovoEirmaoDoJorel.png") as Bitmap;
 
     }
 
@@ -32,6 +32,7 @@ public partial class Clicker : Form
     Bitmap bgStore = null;
     Bitmap grannyProduction = null;
     Bitmap irmaoDoJorelPicture = null;
+    Bitmap irmaoDoJorelProduction = null;
 
 
     RectangleF avocadoRect = Rectangle.Empty;
@@ -42,6 +43,7 @@ public partial class Clicker : Form
     RectangleF storeRect = RectangleF.Empty;
     RectangleF productionReact = RectangleF.Empty;
     RectangleF grannyProductionReact = RectangleF.Empty;
+    RectangleF irmaoDoJorelProductionRect = RectangleF.Empty;
 
     Point cursor = Point.Empty;
 
@@ -168,15 +170,17 @@ public partial class Clicker : Form
                 {
                     case GrannyJuju granny:
 
-                        var grannyProductionWidth = productionReact.Width / 15;
-                        var grannyProductionHeight = productionReact.Height / 2;
+                        Brush pen1 = new SolidBrush(Color.FromArgb(222, 253, 247));
 
-                        g.DrawImage(bgGarden, realProductionRect);
+                        var grannyProductionWidth = productionReact.Width / 7;
+                        var grannyProductionHeight = productionReact.Height ;
+
+                        g.FillRectangle(pen1, realProductionRect);
 
                         for (int i = 0; i < (int)granny.QuantityProduct; i++)
                         {
-                            var x = productionReact.X + 50 * i;
-                            if (50 * (i - 2) > productionReact.Width)
+                            var x = productionReact.X + (grannyProductionWidth - 5) * i;
+                            if (x  > productionReact.Width)
                                 break;
 
                             var y = productionReact.Y + productionReact.Height - grannyProductionHeight;
@@ -193,7 +197,32 @@ public partial class Clicker : Form
                         break;
 
                     case JorelsBrother irmaoDoJorel:
-                        g.DrawImage(bgStore, realProductionRect);
+
+                        Brush pen2 = new SolidBrush(Color.FromArgb(255, 255, 209));
+
+                        var irmaoDoJorelProductionWidth = productionReact.Width / 5;
+                        var irmaoDoJorelProductionHeight = productionReact.Height;
+
+                        g.FillRectangle(pen2, realProductionRect);
+
+                        for (int i = 0; i < (int)irmaoDoJorel.QuantityProduct; i++)
+                        {
+                            var x = productionReact.X + (irmaoDoJorelProductionWidth - 5) * i;
+                            if (x > productionReact.Width)
+                                break;
+
+                            var y = realProductionRect.Y + productionReact.Height - irmaoDoJorelProductionHeight;
+
+                            var irmaoDoJorelRect = new RectangleF(
+                                x,
+                                y,
+                                irmaoDoJorelProductionWidth,
+                                irmaoDoJorelProductionHeight
+                            );
+
+                            g.DrawImage(irmaoDoJorelProduction, irmaoDoJorelRect);
+                        }
+
                         break;
 
 
